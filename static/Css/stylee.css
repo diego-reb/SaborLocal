@@ -1,0 +1,155 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #8efb9c;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    flex: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1D9443;
+    padding: 15px 30px;
+    border-radius: 5px;
+}
+
+.menu-title {
+    display: none;
+    color: #fff;
+    margin: 0;
+}
+
+.search-bar {
+    background-color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar i {
+    color: #666;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.user-info i {
+    margin-right: 5px;
+    color: #666;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #66D575;
+    padding: 10px 0;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.nav-bar a {
+    background-color: #DAB38D;
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.nav-bar a:hover {
+    background-color: #34495e;
+}
+
+.nav-bar a i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+    background-color: #8efb9c;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #DAB38D;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.item i {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #666;
+}
+.footer {
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    background-color: #a7bdc1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: auto; /* Empuja el footer hacia abajo */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el body tenga al menos la altura de la ventana */
+}
+
+.container {
+    flex: 1; /* Permite que el contenedor se expanda y ocupe el espacio restante */
+}
+.footer a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.9em;
+    margin: 0 40px; /* Espacio entre los elementos del footer */
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center; /* Centra los iconos horizontalmente */
+    align-items: center; /* Centra los iconos verticalmente */
+}
+
+.social-icons a {
+    color: rgb(179, 137, 69); /* Color azul para los iconos */
+    font-size: 2em; /* Tamaño de los iconos */
+    margin: 0 10px; /* Espacio entre los iconos */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+}
+
+.social-icons a:hover {
+    color: rgb(210, 154, 21); /* Color azul oscuro al pasar el ratón */
+}

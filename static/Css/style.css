@@ -8,26 +8,26 @@
 html, body {
     height: 100%;
 }
-main {
-    flex: 1;
-    padding: 20px;
-    background-color: #f9f9f9;
-}        
-       
-footer {
-    background-color: #66D575;
-    color: white;
-    padding: 20px 0;
-    margin-top: auto; 
-}        
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 30px;
+.container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}        
+    flex-direction: column;
+    min-height: 100vh;
+}
+      
+       
+.footer {
+    background-color: #66D575;
+    display: flex;
+    justify-content: center;
+    padding: 25px; /* Aumenta el padding */
+    border-top: 1px solid #eee;
+  }
+
+  .footer a {
+    margin: 0 15px; /* Aumenta el margen */
+    color: #333;
+    font-size: 1.8em; /* Aumenta el tamaño de la fuente */
+  }     
 body{
     background-color: #8efb9c;
     display: flex;
@@ -46,6 +46,12 @@ header {
 .logo-container {
     display: flex;
     align-items: center;
+}
+
+.logo-container img {
+    width: 150px; /* Ajusta este valor según el tamaño deseado */
+    height: auto; /* Mantiene la proporción original */
+    max-width: 100%; /* Evita que se desborde en pantallas pequeñas */
 }
 
 .logo {
@@ -170,10 +176,11 @@ header {
 }
 
 main {
+    flex: 1;
     padding: 20px;
     max-width: 1200px;
     margin: 20px auto;
-    background-color: #8efb9c;;
+    background-color: #FFFFFF;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
@@ -307,6 +314,15 @@ main p {
     flex: 1;
     display: flex;
     justify-content: center;
+}
+.image-content img {
+    max-width: 100%; /* Ajusta el ancho al contenedor */
+    max-height: 80vh; /* Limita la altura al 80% del viewport (ajustable) */
+    width: auto; /* Mantiene la proporción original */
+    height: auto; /* Mantiene la proporción original */
+    border: none; /* Elimina cualquier borde */
+    outline: none; /* Elimina el contorno al enfocar (si lo hay) */
+    box-shadow: none; /* Elimina sombras si las hubiera */
 }
 
 .content-image {
