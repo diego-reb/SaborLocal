@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos</title>
+    <link rel="stylesheet" href="/static/Css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .pedidos {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: sans-serif;
+        }
+
+        .pedidos th, .pedidos td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .pedidos th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .pedidos tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .estado-pendiente {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .estado-enviado {
+            color: blue;
+            font-weight: bold;
+        }
+
+        .estado-entregado {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="/templates/index.html">
+                <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+            </a>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" placeholder="Buscar..." class="search-input" id="searchInput">
+            <button class="search-button" id="searchButton">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        
+       
+        <div class="cart-container">
+            <a href="carrito.html">
+                <i class="fas fa-shopping-cart cart-icon"></i>
+            </a>
+            <span id="cart-count">0</span>
+        </div>
+        
+        <div class="user-menu">
+            <div class="user-icon" id="userIcon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="#"><i class="fas fa-cog"></i> Configuración</a>
+                <a href="login.html"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+    <nav class="main-menu">
+        <ul>
+            <li><a href="catalogo.html"><i class="fas fa-book"></i> Catálogo</a></li>
+            <li><a href="promociones.html"><i class="fas fa-tag"></i> Promociones</a></li>
+            <li><a href="pedidos.html"><i class="fas fa-clipboard-list"></i> Pedidos</a></li>
+        </ul>
+    </nav>
+    <main>
+        <table class="pedidos" id="pedidosTable">
+            <thead>
+                <tr>
+                    <th>Número de Pedido</th>
+                    <th>Fecha</th>
+                    <th>Productos</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#12345</td>
+                    <td>2024-05-15</td>
+                    <td>Tomates x2, Uvas x1</td>
+                    <td>$25.00</td>
+                    <td class="estado-pendiente">Pendiente</td>
+                </tr>
+                <tr>
+                    <td>#12346</td>
+                    <td>2024-05-16</td>
+                    <td>Manzanas x3</td>
+                    <td>$11.99</td>
+                    <td class="estado-enviado">Enviado</td>
+                </tr>
+                <tr>
+                    <td>#12347</td>
+                    <td>2024-05-17</td>
+                    <td>Naranjas x2, Plátanos x1</td>
+                    <td>$23.98</td>
+                    <td class="estado-entregado">Entregado</td>
+                </tr>
+                <tr>
+                    <td>#12348</td>
+                    <td>2024-05-18</td>
+                    <td>Fresas x1, Kiwis x2</td>
+                    <td>$30.97</td>
+                    <td class="estado-pendiente">Pendiente</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <footer class="site-footer">
+        <div class="footer">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fas fa-phone"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const pedidosTable = document.getElementById('pedidosTable');
+            const pedidos = pedidosTable.getElementsByTagName('tr');
+
+            searchInput.addEventListener('input', function() {
+                const searchTerm = searchInput.value.toLowerCase();
+
+                Array.from(pedidos).forEach((pedido, index) => {
+                    if (index === 0) return; // Saltar el encabezado de la tabla
+
+                    const orderNumber = pedido.cells[0].textContent.toLowerCase();
+                    const orderDate = pedido.cells[1].textContent.toLowerCase();
+                    const orderProducts = pedido.cells[2].textContent.toLowerCase();
+                    const orderTotal = pedido.cells[3].textContent.toLowerCase();
+                    const orderStatus = pedido.cells[4].textContent.toLowerCase();
+
+                    if (orderNumber.includes(searchTerm) ||
+                        orderDate.includes(searchTerm) ||
+                        orderProducts.includes(searchTerm) ||
+                        orderTotal.includes(searchTerm) ||
+                        orderStatus.includes(searchTerm)) {
+                        pedido.style.display = 'table-row';
+                    } else {
+                        pedido.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="/Js/iconousuario.js"></script>
+</body>
+</html>

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/static/Css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-         .container {
+        .container {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 20px;
@@ -19,7 +19,7 @@
         .product {
             border: 1px solid #ddd;
             border-radius: 8px;
-            padding: 15px;
+            padding: 1px;
             text-align: center;
             background: white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -66,14 +66,24 @@
 <body>
     <header>
         <div class="logo-container">
-            <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+            <a href="/templates/index.html">
+                <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+            </a>
         </div>
         
         <div class="search-container">
-            <input type="text" placeholder="Buscar..." class="search-input">
-            <button class="search-button">
+            <input type="text" placeholder="Buscar..." class="search-input" id="searchInput">
+            <button class="search-button" id="searchButton">
                 <i class="fas fa-search"></i>
             </button>
+        </div>
+        
+       
+        <div class="cart-container">
+            <a href="carrito.html">
+                <i class="fas fa-shopping-cart cart-icon"></i>
+            </a>
+            <span id="cart-count">0</span>
         </div>
         
         <div class="user-menu">
@@ -92,126 +102,111 @@
             <li><a href="catalogo.html"><i class="fas fa-book"></i> Catálogo</a></li>
             <li><a href="promociones.html"><i class="fas fa-tag"></i> Promociones</a></li>
             <li><a href="pedidos.html"><i class="fas fa-clipboard-list"></i> Pedidos</a></li>
-            <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i> Carrito</a></li>
+            
         </ul>
     </nav>
 
-    <main class="container">
-        <!-- Producto 1 -->
-        <div class="product">
-            <img src="tomates.jpg" alt="Tomates">
-            <h3>Tomates Frescos</h3>
+    <main class="container" id="productList">
+        <div class="product" id="productsList">
+            <img src="/static/Img/jitomate.jpg" alt="jitomate">
+            <h3>Jitomate Frescos</h3>
             <div class="price">$10.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 2 -->
         <div class="product">
-            <img src="uvas.jpg" alt="Uvas">
+            <img src="/static/Img/uvas.jpg" alt="Uvas">
             <h3>Uvas Dulces</h3>
             <div class="price">$15.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 3 -->
         <div class="product">
-            <img src="zanahorias.jpg" alt="Zanahorias">
+            <img src="/static/Img/zanahoria.jpg" alt="Zanahorias">
             <h3>Zanahorias</h3>
-            <div class="price">$8.00</div>
+            <div class="price">$80.0</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 4 -->
         <div class="product">
-            <img src="huevos.jpg" alt="Huevos">
+            <img src="/static/Img/huevo.jpg" alt="Huevos">
             <h3>Huevos Frescos</h3>
             <div class="price">$12.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 5 -->
         <div class="product">
-            <img src="manzanas.jpg" alt="Manzanas">
+            <img src="/static/Img/Manzana.jpg" alt="Manzanas">
             <h3>Manzanas</h3>
             <div class="price">$9.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 6 -->
         <div class="product">
-            <img src="pan.jpg" alt="Pan">
+            <img src="/static/Img/pan.png" alt="Pan">
             <h3>Pan Integral</h3>
             <div class="price">$7.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 7 -->
         <div class="product">
-            <img src="lechuga.jpg" alt="Lechuga">
+            <img src="/static/Img/lechuga.png" alt="Lechuga">
             <h3>Lechuga</h3>
             <div class="price">$11.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 8 -->
         <div class="product">
-            <img src="sandia.jpg" alt="Sandia">
+            <img src="/static/Img/sandia.png" alt="Sandia">
             <h3>Sandia</h3>
             <div class="price">$18.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 9 -->
         <div class="product">
-            <img src="papaya.jpg" alt="papaya">
+            <img src="/static/Img/papaya.png" alt="papaya">
             <h3>Papaya</h3>
             <div class="price">$22.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 10 -->
         <div class="product">
-            <img src="arroz.jpg" alt="Arroz">
+            <img src="/static/Img/arroz.jpg" alt="Arroz">
             <h3>Arroz Blanco</h3>
             <div class="price">$6.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 11 -->
         <div class="product">
-            <img src="frijoles.jpg" alt="Frijoles">
+            <img src="/static/Img/frijoles.png" alt="Frijoles">
             <h3>Frijoles Negros</h3>
             <div class="price">$5.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 12 -->
         <div class="product">
-            <img src="aguacate.jpg" alt="Aguacate">
+            <img src="/static/Img/aguacate.jpg" alt="Aguacate">
             <h3>Aguacates</h3>
             <div class="price">$14.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 13 -->
         <div class="product">
-            <img src="limones.jpg" alt="Limones">
+            <img src="/static/Img/limon.jpg" alt="Limones">
             <h3>Limones</h3>
             <div class="price">$4.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 14 -->
         <div class="product">
-            <img src="cebolla.jpg" alt="Cebolla">
+            <img src="/static/Img/Cebolla.png" alt="Cebolla">
             <h3>Cebollas</h3>
             <div class="price">$3.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
 
-        <!-- Producto 15 -->
         <div class="product">
-            <img src="ajo.jpg" alt="Ajo">
+            <img src="/static/Img/ajo.jpg" alt="Ajo">
             <h3>Ajo</h3>
             <div class="price">$2.50</div>
             <button class="add-to-cart">Agregar al carrito</button>
@@ -224,8 +219,13 @@
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fas fa-phone"></i></a>
             <a href="#"><i class="fas fa-envelope"></i></a>
-          </div>
+        </div>
     </footer>
+    <script src="/Js/buscador.js"></script>
+    <script src="/Js/contador.js"></script>
+    <script src="/Js/iconousuario.js"></script>
+    <script src="/Js/carrito.js"></script>
+    <script src="/Js/localstorage.js"></script>
+    <script src="/Js/ProductosCarrito.js"></script>
 </body>
-
 </html>

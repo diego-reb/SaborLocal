@@ -11,25 +11,34 @@
     <div class="container">
         <header>
             <div class="logo-container">
-                <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+                <a href="/templates/index.html">
+                    <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+                </a>
             </div>
             
             <div class="search-container">
-                <input type="text" placeholder="Buscar..." class="search-input">
-                <button class="search-button">
+                <input type="text" placeholder="Buscar..." class="search-input" id="searchInput">
+                <button class="search-button" id="searchButton">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
-            
-            <div class="user-menu">
-                <div class="user-icon" id="userIcon">
-                    <i class="fas fa-user-circle"></i>
-                </div>
-                <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="#"><i class="fas fa-cog"></i> Configuración</a>
-                    <a href="login.html"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-                </div>
-            </div>
+
+           <div class="cart-container">
+    <a href="carrito.html">
+        <i class="fas fa-shopping-cart cart-icon"></i>
+    </a>
+    <span id="cart-count">0</span>
+</div>
+
+<div class="user-menu">
+    <div class="user-icon" id="userIcon">
+        <i class="fas fa-user-circle"></i>
+    </div>
+    <div class="dropdown-menu" id="dropdownMenu">
+        <a href="config.html"><i class="fas fa-cog"></i> Configuración</a>
+        <a href="login.html"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    </div>
+</div>
         </header>
 
         <nav class="main-menu">
@@ -37,28 +46,29 @@
                 <li><a href="catalogo.html"><i class="fas fa-book"></i> Catálogo</a></li>
                 <li><a href="promociones.html"><i class="fas fa-tag"></i> Promociones</a></li>
                 <li><a href="pedidos.html"><i class="fas fa-clipboard-list"></i> Pedidos</a></li>
-                <li><a href="carrito.html"><i class="fas fa-shopping-cart"></i> Carrito</a></li>
+                
             </ul>
         </nav>
 
         <main>
             <div class="cafe-container">
                 <div class="cafe-box">
-                    <img src="imagen-producto2.jpg" alt="Oferta especial" class="box-image">
+                    <img src="/static/Img/huevo.jpg" alt="Oferta especial" class="box-image">
                     <div class="box-overlay offer-overlay">
                         <div class="offer-tag">OFERTA</div>
                         <h3>Oferta Especial</h3>
-                        <p class="original-price">$100.00</p>
-                        <p class="discount-price">$79.99</p>
+                        <p class="original-price">$50.00</p>
+                        <p class="discount-price">$39.99</p>
+                        <a href="promociones.html">
                         <button class="offer-button">Ver Oferta</button>
+                        </a>
                     </div>
                 </div>
                 <div class="cafe-box">
-                    <img src="imagen-producto1.jpg" alt="Producto destacado" class="box-image">
+                    <img src="/static/Img/aguacate.jpg" alt="Producto destacado" class="box-image">
                     <div class="box-overlay">
                         <h3>Producto Destacado</h3>
-                        <p>Descripción breve del producto</p>
-                        <p class="discount-price">$100.00</p>
+                        <p class="discount-price">$50.00</p>
                     </div>
                 </div>
                 <div class="cafe-box">
@@ -84,7 +94,31 @@
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fas fa-phone"></i></a>
             <a href="#"><i class="fas fa-envelope"></i></a>
-          </div>
+        </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+
+            searchButton.addEventListener('click', function() {
+                const searchTerm = searchInput.value.toLowerCase();
+                if (searchTerm) {
+                    // Redirigir a la página de catálogo con el término de búsqueda
+                    window.location.href = `catalogo.html?search=${searchTerm}`;
+                }
+            });
+
+            searchInput.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    searchButton.click();
+                }
+            });
+        });
+    </script>
+    <script src="/Js/contador.js"></script>
+    <script src="/Js/iconousuario.js"></script>
+    <script src="/Js/carrito.js"></script>
+    <script src="/Js/localstorage.js"></script>
 </body>
 </html>
