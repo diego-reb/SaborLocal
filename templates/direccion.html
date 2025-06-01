@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dirección</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #e0f7fa; /* Fondo verde claro general */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center; /* Centrar el contenido horizontalmente */
+        }
+
+        header {
+            background-color: #3e913e; /* Verde claro para la cabecera */
+            color: #333; /* Texto oscuro */
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%; /* Ocupar todo el ancho */
+            box-sizing: border-box; /* Incluir padding y border en el ancho */
+            border-bottom: 1px solid #ccc; /* Línea divisoria inferior */
+        }
+
+        header .logo-container a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #121111;
+        }
+
+        header .logo-container .logo {
+            max-height: 40px;
+            margin-right: 20px; /* Espacio entre el logo y el buscador */
+        }
+
+        header .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #f5f5dc; /* Beige claro para el buscador */
+            border-radius: 5px;
+            padding: 5px 15px; /* Añadir padding horizontal */
+            border: 1px solid #d2b48c; /* Borde café claro */
+            width: 50%; /* Ancho del buscador */
+            margin-right: 20px; /* Espacio a la derecha */
+            margin-left: 0; /* Alineado a la izquierda */
+        }
+
+        header .search-container .search-input {
+            border: none;
+            padding: 8px;
+            outline: none;
+            flex-grow: 1; /* Permite que el input crezca dentro del contenedor */
+            border-radius: 5px; /* Redondear el input también */
+        }
+
+        header .search-container .search-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px; /* Ajustar padding del botón */
+            color: #777;
+        }
+
+        header .search-container .fa-search {
+            font-size: 1em;
+            color: #777; /* Color del icono de la lupa */
+        }
+
+        header .user-menu {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        header .user-menu .user-icon {
+            color: #333;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        header .user-menu .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 120px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            display: none; /* Initially hidden */
+        }
+
+        header .user-menu:hover .dropdown-menu {
+            display: block;
+        }
+
+        header .user-menu .dropdown-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        header .user-menu .dropdown-menu a:hover {
+            background-color: #ddd;
+        }
+
+        nav {
+            background-color: #f0f8ff; /* Fondo blanco azulado claro para la navegación */
+            display: flex;
+            justify-content: center; /* Centrar los botones */
+            padding: 10px 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        nav a {
+            background-color: #deb887; /* Café claro (tan) para los botones */
+            color: #333; /* Texto oscuro para los botones */
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin: 0 5px; /* Espacio entre botones */
+            font-size: 1em; /* Tamaño de la fuente */
+            display: inline-block; /* Para que el padding y el ancho funcionen correctamente */
+            text-align: center; /* Centrar el texto dentro del botón */
+            min-width: 100px; /* Ancho mínimo para igualar tamaños (ajusta según necesites) */
+            box-sizing: border-box; /* Incluir padding y border en el ancho */
+        }
+
+        nav a:hover {
+            background-color: #a0522d; /* Café más oscuro al pasar el ratón */
+            color: white; /* Texto blanco al pasar el ratón */
+        }
+
+        nav i {
+            margin-right: 5px;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centrar horizontalmente */
+            background-color: #f9f9f9; /* Fondo blanco para el formulario */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto; /* Centrar el formulario y dar espacio */
+            width: 80%; /* Ajustar el ancho del formulario */
+            max-width: 600px; /* Ancho máximo del formulario */
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center; /* Centrar el título del formulario */
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .form-group label {
+            width: 100px; /* Ancho fijo para las etiquetas */
+            margin-right: 10px;
+            text-align: left;
+            color: #555;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+            /* Asegurar que el texto esté dentro del campo */
+            width: calc(100% - 110px); /* 100% menos el ancho de la etiqueta y el margen */
+        }
+
+        .form-group .inline-inputs {
+            display: flex;
+            flex-grow: 1;
+            gap: 10px;
+            /* Asegurar que los inputs estén dentro del espacio correcto */
+            width: calc(100% - 110px);
+        }
+
+        .form-group .inline-inputs input[type="text"] {
+            width: 50%; /* O un ancho específico */
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between; /* Espacio entre los botones */
+            width: 100%; /* Ocupar el ancho del formulario */
+            margin-top: 20px;
+        }
+
+        .form-actions button {
+            background-color: #157015; /* Verde claro para ambos botones */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-actions button:hover {
+            background-color: #6b8e23; /* Verde más oscuro al pasar el ratón */
+        }
+
+        footer.site-footer {
+            background-color: #1f701f; /* Verde claro para el pie de página */
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            margin-top: auto; /* Empuja el footer hacia abajo */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        footer.site-footer .footer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        footer.site-footer .footer a {
+            color: white;
+            font-size: 1.5em; /* Ajusta el tamaño de los iconos */
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="/">
+                <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Buscar..." class="search-input" id="searchInput">
+            <button class="search-button" id="searchButton">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="user-menu">
+            <div class="user-icon" id="userIcon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="/config"><i class="fas fa-cog"></i> Configuración</a>
+                <a href="/sesion"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <a href="/CA"><i class="fas fa-list"></i> Catálogo</a>
+        <a href="/PC"><i class="fas fa-tag"></i> Promociones</a>
+        <a href="/P"><i class="fas fa-shopping-basket"></i> Pedidos</a>
+    </nav>
+
+    <main>
+        <h2>DIRECCIÓN</h2>
+       <form method="POST" action="/Direccion">
+    <div class="form-group">
+        <label for="calle">Calle:</label>
+        <input type="text" id="calle" name="calle" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="colonia">Colonia:</label>
+        <select id="colonia" name="colonia" required>
+    <option value="" disabled selected>Seleccione una colonia</option>
+    {% for col in colonias %}
+        <option value="{{ col.id_col }}">{{ col.colonia }}</option> <!-- Usar id_colonia en lugar de id -->
+    {% endfor %}
+</select>
+
+    </div>
+
+    <div class="form-group">
+        <label for="alcaldia">Alcaldía:</label>
+        <select id="alcaldia" name="alcaldia" required>
+            <option value="" disabled selected>Seleccione una alcaldía</option>
+            {% for alc in alcaldias %}
+                <option value="{{ alc.id_al }}">{{ alc.alcaldia }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+    <label for="cp">CP:</label>
+    <select id="cp" name="cp" required>
+        <option value="" disabled selected>Selecciona un código postal</option>
+        {% for codigo_postal in codigos_postales %}
+            <option value="{{ codigo_postal.id_cp }}">{{ codigo_postal.id_cp }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+
+    <div class="form-group">
+        <label for="lote">Lote:</label>
+        <input type="text" id="lote" name="lote" required>
+        
+        <label for="mz">Mz:</label>
+        <input type="text" id="mz" name="mz" required>
+    </div>
+
+    <div class="form-group">
+        <label for="no_int">No int:</label>
+        <input type="text" id="no_int" name="no_int">
+        
+        <label for="no_ext">No ext:</label>
+        <input type="text" id="no_ext" name="numero" required>
+    </div>
+
+    <div class="form-group">
+        <label for="referencias">Referencias:</label>
+        <textarea id="referencias" name="referencias" required></textarea>
+    </div>
+
+    <div class="form-actions">
+        <button type="button" onclick="window.history.back()">
+            <i class="fas fa-arrow-left"></i> Regresar
+        </button>
+        <button type="submit">Guardar Dirección</button>
+    </div>
+</form>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fas fa-phone"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+</body>
+</html>

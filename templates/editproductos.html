@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor Local - Detalle Producto</title>
+    <link rel="stylesheet" href="/static/Css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8f0; /* Un color de fondo claro */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #368736; /* Verde claro similar al header */
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .search-bar {
+            display: flex;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            width: 200px;
+        }
+
+        .search-bar button {
+            background-color: #ebe8e3;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .search-bar button i { /* Estilo para el icono de buscar */
+            font-size: 20px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-icon {
+            height: 30px;
+            margin-right: 5px;
+            display: flex; /* Para centrar el icono */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-icon i { /* Estilo para el icono de usuario */
+            font-size: 30px;
+        }
+
+        .navigation-bar {
+            background-color: #befcc0; /* Verde claro para la barra de navegación */
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 20px;
+        }
+
+        .nav-button {
+            background-color: #c1e1c1; /* Verde más claro para los botones de navegación */
+            color: #333;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background-color: #b0d8b0;
+        }
+
+         main {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    main h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    input[type="file"] {
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    img {
+        display: block;
+        max-width: 200px;
+        margin: 10px auto;
+        border-radius: 6px;
+    }
+
+    button[type="submit"] {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+        .product-detail-container {
+            background-color: #e0eee0; /* Fondo claro para el contenedor de detalles */
+            border-radius: 10px;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 80%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-image-wrapper {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .detail-label {
+            color: #555;
+            font-weight: bold;
+            width: 30%;
+            text-align: left;
+        }
+
+        .detail-value {
+            background-color: #d3d3d3; /* Gris claro para los valores */
+            color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            width: 65%;
+            text-align: left;
+        }
+
+        .guardar-button {
+            background-color: #3cb371; /* Verde para el botón Guardar */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .guardar-button:hover {
+            background-color: #2e8b57;
+        }
+
+        footer {
+            background-color: #8fbc8f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icons a i { /* Estilo para los iconos de redes sociales */
+            font-size: 30px;
+        }
+
+        .form-editar-producto {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+    }
+
+    .form-editar-producto label {
+        font-weight: bold;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .form-editar-producto input,
+    .form-editar-producto select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .form-editar-producto input[type="file"] {
+        padding: 5px;
+    }
+
+    .imagen-producto {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .btn-submit {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .btn-submit:hover {
+        background-color: #45a049;
+    }
+    .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Para que no interfiera con la interacción */
+            z-index: -1; /* Detrás del contenido */
+        }
+
+        .fruit-icon {
+            position: absolute;
+            font-size: 1.5em;
+            animation: float 5s infinite alternate, moveAcross 20s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        @keyframes moveAcross {
+            0% { transform: translateX(-10vw); }
+            100% { transform: translateX(110vw); }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="animated-background">
+        <div class="fruit-icon" style="left: 10%; top: 20%; color: #e67e22; font-size: 1.2em;"><i class="fas fa-carrot"></i></div>
+        <div class="fruit-icon" style="left: 30%; top: 70%; color: #c0392b;"><i class="fas fa-apple-alt"></i></div>
+        <div class="fruit-icon" style="left: 50%; top: 10%; color: #f1c40f; font-size: 1.8em;"><i class="fas fa-lemon"></i></div>
+        <div class="fruit-icon" style="left: 70%; top: 50%; color: #8e44ad;"><i class="fas fa-grape"></i></div>
+        <div class="fruit-icon" style="left: 90%; top: 30%; color: #27ae60;"><i class="fas fa-leaf"></i></div>
+        <div class="fruit-icon" style="left: 5%; top: 50%; color: #d35400;"><i class="fas fa-pepper-hot"></i></div>
+        <div class="fruit-icon" style="left: 20%; top: 80%; color: #1abc9c; font-size: 1.6em;"><i class="fas fa-seedling"></i></div>
+        <div class="fruit-icon" style="left: 40%; top: 35%; color: #34495e;"><i class="fas fa-eggplant"></i></div>
+        <div class="fruit-icon" style="left: 60%; top: 15%; color: #e67e22; font-size: 1.4em;"><i class="fas fa-pumpkin"></i></div>
+        <div class="fruit-icon" style="left: 80%; top: 65%; color: #f39c12;"><i class="fas fa-banana"></i></div>
+        <div class="fruit-icon" style="left: 15%; top: 45%; color: #9b59b6;"><i class="fas fa-stroopwafel"></i></div>
+        <div class="fruit-icon" style="left: 35%; top: 15%; color: #2ecc71;"><i class="fas fa-lime"></i></div>
+        <div class="fruit-icon" style="left: 55%; top: 85%; color: #c0392b; font-size: 1.3em;"><i class="fas fa-cherry"></i></div>
+        <div class="fruit-icon" style="left: 75%; top: 25%; color: #f1c40f;"><i class="fas fa-pineapple"></i></div>
+        <div class="fruit-icon" style="left: 95%; top: 55%; color: #16a085;"><i class="fas fa-corn"></i></div>
+    </div>
+    <header>
+        <div class="logo-container">
+            <a href="/V">
+                <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+            </a>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" placeholder="Buscar..." class="search-input" id="searchInput">
+            <button class="search-button" id="searchButton">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        
+        
+        
+        <div class="user-menu">
+            <div class="user-icon" id="userIcon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="dropdown-menu" id="dropdownMenu">
+
+    {% if 'cliente_id' in session %}
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    {% else %}
+        <a href="/sesion"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+    {% endif %}
+</div>
+        </div>
+    </header>
+
+    <nav class="main-menu">
+        <ul>
+           <li><a href="/CV"><i class="fas fa-book"></i> Mis productos</a></li>
+            <li><a href="/AP"><i class="fas fa-tag"></i> Agregar Producto</a></li>
+            <li><a href="/P"><i class="fas fa-clipboard-list"></i> Pedidos</a></li>
+            
+        </ul>
+    </nav>
+<main>
+    <h1>Editar producto: {{ producto.nombre }}</h1>
+
+    <form method="POST" action="{{ url_for('editar_producto', id_pro=producto.id_pro) }}" enctype="multipart/form-data">
+        
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre_producto" value="{{ producto.nombre }}" required>
+        <br>
+
+        <label for="descripcion">Descripción:</label>
+        <input type="text" name="descripcion" value="{{ producto.descripcion }}" required>
+        <br>
+
+        <label for="precio">Precio:</label>
+        <input type="number" name="precio" value="{{ producto.precio }}" step="0.01" min="0" inputmode="decimal" required>
+        <br>
+
+        <label for="categoria">Categoría:</label>
+        <select name="categoria" required>
+            <option value="">Selecciona una categoría</option>
+            {% for categoria in categorias %}
+                <option value="{{ categoria[0] }}" {% if categoria[0]|string == producto.id_cat|string %}selected{% endif %}>
+                    {{ categoria[1] }}
+                </option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="imagen">Imagen actual:</label><br>
+        <img src="{{ url_for('imagen_producto', id_pro=producto.id_pro) }}"
+             alt="{{ producto.nombre }}"
+             style="max-width: 200px; border-radius: 8px;"><br><br>
+
+        <label for="imagen">Cambiar imagen:</label>
+        <input type="file" name="imagen"><br><br>
+
+        <button type="submit">Guardar cambios</button>
+    </form>
+</main>
+
+
+    <footer>
+        <div class="footer">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fas fa-phone"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+    <script src="/static/Js/buscador.js"></script>
+    <script src="/static/Js/contador.js"></script>
+    <script src="/static/Js/iconousuario.js"></script>
+    <script src="/static/Js/carrito.js"></script>
+    <script src="/static/Js/localstorage.js"></script>
+    <script src="/static/Js/ProductosCarrito.js"></script>
+</body>
+</html>

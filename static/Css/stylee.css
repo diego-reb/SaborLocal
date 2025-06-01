@@ -1,146 +1,155 @@
 body {
-    background-color: #d8e8d5;
     font-family: sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
-  }
-  .container {
-    width: 600px;
-    height: 650px;
-    background-color: #b4ddb4;
-    padding: 50px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-  }
-  h2 {
-    color: #333;
-    font-size: 28px;
-  }
-  label {
-    display: block;
-    margin-top: 25px;
-    color: #333;
-    font-size: 18px;
-  }
-  input[type="text"],
-  input[type="password"] {
-    width: 95%;
-    padding: 18px;
-    margin: 20px 0 30px 0;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    box-sizing: border-box;
-    font-size: 18px;
-  }
-  button {
-    background-color: #165c16;
-    color: white;
-    padding: 18px 35px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 18px;
-  }
-  .signup-link {
-    margin-top: 30px;
-    font-size: 18px;
-  }
-  a {
-    color: #164f16;
-    font-size: 18px;
-  }
-  .header {
-    background-color: #2f792f;
-    padding: 25px;
-    border-radius: 5px 5px 0 0;
+    min-height: 100vh;
+    background-color: #8efb9c;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    flex: 1;
+}
+
+.header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-  }
-  .header-content { /* Nuevo div para encapsular la imagen y el título */
-    background-color:  #2f792f; /* Verde fuerte */
-    padding: 5px;
+    background-color: #1D9443;
+    padding: 15px 30px;
+    border-radius: 5px;
+}
+
+.menu-title {
+    display: none;
+    color: #fff;
+    margin: 0;
+}
+
+.search-bar {
+    background-color: #fff;
+    padding: 8px 15px;
     border-radius: 20px;
     display: flex;
     align-items: center;
-  }
-  .header img {
-    height: 80px;
-    margin-right: 25px;
-  }
-  .header h1 {
-    margin: 0;
-    color: white; /* Cambia el color del texto a blanco para que se vea bien en el fondo verde */
-    font-size: 32px;
-  }
-  /*Registro*/
-  body {
-    background-color: #a2e196;
-    font-family: sans-serif;
-  }
-  .container {
-    width: 600px; /* Aumenta el ancho */
-    margin: 30px auto; /* Ajusta el margen para centrar */
-    background-color: rgb(230, 237, 231);
-    padding: 30px; /* Aumenta el padding */
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-  h2 {
-    text-align: center;
-    color: #175a17;
-  }
-  label {
-    display: block;
-    margin-bottom: 10px; /* Aumenta el margen inferior */
-    color: #333;
-  }
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: 95%;
-    padding: 12px; /* Aumenta el padding */
-    margin-bottom: 20px; /* Aumenta el margen inferior */
-    border: 1px solid #9bee9b;
-    border-radius: 3px;
-    box-sizing: border-box;
-  }
-  button {
-    background-color: #135513;
-    color: rgb(130, 232, 112);
-    padding: 12px 25px; /* Aumenta el padding */
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    float: right;
-  }
-  .login-link {
-    text-align: left;
-    margin-top: 15px; /* Aumenta el margen superior */
-  }
-  a {
-    color: #104810;
-  }
-  .header {
-    background-color: #2f882f;
-    padding: 15px; /* Aumenta el padding */
-    border-radius: 5px 5px 0 0;
+}
+
+.search-bar i {
+    color: #666;
+}
+
+.user-info {
     display: flex;
     align-items: center;
-  }
-  .header img {
-    height: 60px; /* Aumenta el tamaño de la imagen */
-    margin-right: 15px; /* Aumenta el margen derecho */
-  }
-  .header h1 {
-    margin: 0;
-    color: #333;
-    font-size: 24px; /* Aumenta el tamaño de la fuente */
-  }
+    background-color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.user-info i {
+    margin-right: 5px;
+    color: #666;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #66D575;
+    padding: 10px 0;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.nav-bar a {
+    background-color: #DAB38D;
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.nav-bar a:hover {
+    background-color: #34495e;
+}
+
+.nav-bar a i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+    background-color: #8efb9c;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #DAB38D;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.item i {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #666;
+}
+.footer {
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    background-color: #a7bdc1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: auto; /* Empuja el footer hacia abajo */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el body tenga al menos la altura de la ventana */
+}
+
+.container {
+    flex: 1; /* Permite que el contenedor se expanda y ocupe el espacio restante */
+}
+.footer a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.9em;
+    margin: 0 40px; /* Espacio entre los elementos del footer */
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center; /* Centra los iconos horizontalmente */
+    align-items: center; /* Centra los iconos verticalmente */
+}
+
+.social-icons a {
+    color: rgb(179, 137, 69); /* Color azul para los iconos */
+    font-size: 2em; /* Tamaño de los iconos */
+    margin: 0 10px; /* Espacio entre los iconos */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+}
+
+.social-icons a:hover {
+    color: rgb(210, 154, 21); /* Color azul oscuro al pasar el ratón */
+}

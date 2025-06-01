@@ -77,20 +77,9 @@
     </a>
       <h1>Sabor Local</h1>
     </div>
-    <h2>Registro</h2>
+    <h2>¡Regístrate como vendedor!</h2>
 
-    {%with message = get_flashed_messages()%}
-      {%if messages %}
-          <ul>
-            {% for message in messages %}
-              <li>{{message}}</li>
-            {% endfor %}
-
-          </ul>
-      {% endif %}
-    {% endwith %}
-
-    <form method="POST" action="/registro">
+    <form method="POST" action="/RegistroVen">
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" name="nombre" required>
 
@@ -106,8 +95,20 @@
       <button type="submit">Registrarse</button>
     </form>
     <div class="login-link">
-      <a href="/login">Ya tienes cuenta? INICIA SESION</a>
+      <a href="/LoginVen">Ya tienes cuenta? INICIA SESION</a>
     </div>
   </div>
+
+    <script>
+        // Check for 'registro_exitoso' query parameter in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const registroExitoso = urlParams.get('registro_exitoso');
+
+        if (registroExitoso === 'true') {
+            alert('¡Vendedor registrado con éxito!');
+            // Optional: Remove the query parameter from the URL to prevent showing the alert again on refresh
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
 </body>
 </html>

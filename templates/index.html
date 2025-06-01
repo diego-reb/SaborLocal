@@ -3,92 +3,361 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header Moderno</title>
+    <title>Sabor Local - Directo del Campo a tu Mesa</title>
     <link rel="stylesheet" href="/static/Css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <style>
+    /* Estilos generales */
+    body {
+        font-family: 'Montserrat', sans-serif;
+        margin: 0;
+        background-color: #c9e5c4;
+        color: #343a40;
+        line-height: 1.6;
+        min-height: 100vh; /* Asegura que el body tenga al menos la altura de la ventana */
+        display: flex;
+        flex-direction: column; /* Permite que el footer se pegue abajo */
+        overflow-y: auto; /* Añadido para asegurar el scroll vertical */
+    }
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 20px auto;
+        background-color: #d7e1d5;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        flex-grow: 1; /* Permite que el container crezca y empuje el footer */
+    }
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    /* Encabezado */
+    header {
+        background-color: #28a745;
+        color: #fff;
+        padding: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 4px solid #f6f5f0;
+    }
+    .logo-container {
+        display: flex;
+        align-items: center;
+    }
+    .logo {
+        height: 60px;
+        margin-right: 15px;
+    }
+    .slogan {
+        font-family: 'Pacifico', cursive;
+        font-size: 1.5em;
+        color: #f8f9fa;
+    }
+    .search-container {
+        display: flex;
+    }
+    .search-input {
+        padding: 12px;
+        border: none;
+        border-radius: 8px 0 0 8px;
+        flex-grow: 1;
+        font-size: 1em;
+    }
+    .search-button {
+        background-color: #247319;
+        color: #fff;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 0 8px 8px 0;
+        cursor: pointer;
+        font-size: 1em;
+    }
+    .cart-container {
+        position: relative;
+        margin-left: 20px;
+    }
+    .cart-icon {
+        font-size: 1.8em;
+    }
+    #cart-count {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: #dc3545;
+        color: #fff;
+        border-radius: 50%;
+        padding: 6px;
+        font-size: 0.9em;
+    }
+    .user-menu {
+        position: relative;
+        margin-left: 20px;
+    }
+    .user-icon {
+        font-size: 1.8em;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+    }
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        display: none;
+    }
+    .dropdown-menu a {
+        display: block;
+        padding: 12px 18px;
+        text-decoration: none;
+        color: #343a40;
+        transition: background-color 0.2s ease;
+    }
+    .dropdown-menu a:hover {
+        background-color: #f0f0f0;
+    }
+    .user-menu:hover .dropdown-menu {
+        display: block;
+    }
+
+    /* Navegación principal */
+    nav.main-menu {
+        background-color: #f0fff0;
+        padding: 15px 0;
+        border-bottom: 2px solid #e0eee0;
+    }
+    nav.main-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+    }
+    nav.main-menu li a {
+        color: #28a745;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: background-color 0.2s ease, color 0.2s ease;
+        font-weight: bold;
+    }
+    nav.main-menu li a:hover {
+        background-color: #e0eee0;
+        color: #1e7e34;
+    }
+
+    /* Sección principal */
+    main {
+        padding: 30px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        flex-grow: 1; /* Permite que el main crezca */
+    }
+    .highlight-section {
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        padding: 30px;
+        text-align: center;
+    }
+    .highlight-section img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        transition: transform 0.3s ease-in-out;
+    }
+    .highlight-section img:hover {
+        transform: scale(1.05);
+    }
+    .highlight-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2em;
+        color: #28a745;
+        margin-bottom: 10px;
+    }
+    .highlight-text {
+        color: #555;
+        margin-bottom: 15px;
+    }
+    .offer-section {
+        background-color: #f9dcc4;
+        border-radius: 12px;
+        padding: 25px;
+        text-align: center;
+        border: 2px dashed #e6b380;
+    }
+    .offer-title {
+        font-family: 'Oswald', sans-serif;
+        font-size: 2.5em;
+        color: #d65a31;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .offer-details {
+        font-size: 1.1em;
+        color: #777;
+        margin-bottom: 20px;
+    }
+    .offer-button {
+        background-color: #d65a31;
+        color: #fff;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.2em;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .offer-button:hover {
+        background-color: #b84a28;
+    }
+
+    /* Pie de página */
+    .footer {
+        background-color: #6eaa73;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        border-radius: 0 0 12px 12px;
+        margin-top: 30px;
+    }
+    .footer a {
+        color: #fff;
+        font-size: 1.5em;
+        margin: 0 15px;
+        transition: color 0.2s ease;
+    }
+    .footer a:hover {
+        color: #f8f9fa;
+    }
+    .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Para que no interfiera con la interacción */
+            z-index: -1; /* Detrás del contenido */
+        }
+
+        .fruit-icon {
+            position: absolute;
+            font-size: 1.5em;
+            animation: float 5s infinite alternate, moveAcross 20s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        @keyframes moveAcross {
+            0% { transform: translateX(-10vw); }
+            100% { transform: translateX(110vw); }
+        }
+        h1{
+            color:rgba(9, 155, 43, 0.993)
+        }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@500&family=Pacifico&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@500&family=Pacifico&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="animated-background">
+        <div class="fruit-icon" style="left: 10%; top: 20%; color: #e67e22; font-size: 1.2em;"><i class="fas fa-carrot"></i></div>
+        <div class="fruit-icon" style="left: 30%; top: 70%; color: #c0392b;"><i class="fas fa-apple-alt"></i></div>
+        <div class="fruit-icon" style="left: 50%; top: 10%; color: #f1c40f; font-size: 1.8em;"><i class="fas fa-lemon"></i></div>
+        <div class="fruit-icon" style="left: 70%; top: 50%; color: #8e44ad;"><i class="fas fa-grape"></i></div>
+        <div class="fruit-icon" style="left: 90%; top: 30%; color: #27ae60;"><i class="fas fa-leaf"></i></div>
+        <div class="fruit-icon" style="left: 5%; top: 50%; color: #d35400;"><i class="fas fa-pepper-hot"></i></div>
+        <div class="fruit-icon" style="left: 20%; top: 80%; color: #1abc9c; font-size: 1.6em;"><i class="fas fa-seedling"></i></div>
+        <div class="fruit-icon" style="left: 40%; top: 35%; color: #34495e;"><i class="fas fa-eggplant"></i></div>
+        <div class="fruit-icon" style="left: 60%; top: 15%; color: #e67e22; font-size: 1.4em;"><i class="fas fa-pumpkin"></i></div>
+        <div class="fruit-icon" style="left: 80%; top: 65%; color: #f39c12;"><i class="fas fa-banana"></i></div>
+        <div class="fruit-icon" style="left: 15%; top: 45%; color: #9b59b6;"><i class="fas fa-stroopwafel"></i></div>
+        <div class="fruit-icon" style="left: 35%; top: 15%; color: #2ecc71;"><i class="fas fa-lime"></i></div>
+        <div class="fruit-icon" style="left: 55%; top: 85%; color: #c0392b; font-size: 1.3em;"><i class="fas fa-cherry"></i></div>
+        <div class="fruit-icon" style="left: 75%; top: 25%; color: #f1c40f;"><i class="fas fa-pineapple"></i></div>
+        <div class="fruit-icon" style="left: 95%; top: 55%; color: #16a085;"><i class="fas fa-corn"></i></div>
+    </div>
     <div class="container">
         <header>
             <div class="logo-container">
-                <a href="/templates/index.html">
-                    <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
-                </a>
+                <img src="/static/Img/Sabor.png" alt="Logo Sabor Local" class="logo">
+                <span class="slogan">Directo del Campo a tu Mesa</span>
             </div>
-            
-            <div class="search-container">
-                <input type="text" placeholder="Buscar..." class="search-input" id="searchInput">
-                <button class="search-button" id="searchButton">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
+
+           
 
            <div class="cart-container">
-    <a href="carrito.html">
-        <i class="fas fa-shopping-cart cart-icon"></i>
-    </a>
-    <span id="cart-count">0</span>
+                <a href="/C">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                </a>
+                <span id="cart-count">0</span>
+            </div>
+            <div class="user-menu">
+                <div class="user-icon" id="userIcon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="dropdown-menu" id="dropdownMenu">
+
+    {% if 'cliente_id' in session %}
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    {% else %}
+        <a href="/sesion"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+    {% endif %}
 </div>
 
-<div class="user-menu">
-    <div class="user-icon" id="userIcon">
-        <i class="fas fa-user-circle"></i>
-    </div>
-    <div class="dropdown-menu" id="dropdownMenu">
-        <a href="config.html"><i class="fas fa-cog"></i> Configuración</a>
-        <a href="login.html"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-    </div>
-</div>
+            </div>
         </header>
+        
 
         <nav class="main-menu">
             <ul>
-                <li><a href="catalogo.html"><i class="fas fa-book"></i> Catálogo</a></li>
-                <li><a href="promociones.html"><i class="fas fa-tag"></i> Promociones</a></li>
-                <li><a href="pedidos.html"><i class="fas fa-clipboard-list"></i> Pedidos</a></li>
+                <li><a href="/CA"><i class="fas fa-book"></i> Catálogo</a></li><li class="sabor-local-container">
+                <h1> Sabor Local</h1>
                 
+            </li>
+                <li><a href="/P"><i class="fas fa-clipboard-list"></i> Pedidos</a></li>
             </ul>
         </nav>
 
         <main>
-            <div class="cafe-container">
-                <div class="cafe-box">
-                    <img src="/static/Img/huevo.jpg" alt="Oferta especial" class="box-image">
-                    <div class="box-overlay offer-overlay">
-                        <div class="offer-tag">OFERTA</div>
-                        <h3>Oferta Especial</h3>
-                        <p class="original-price">$50.00</p>
-                        <p class="discount-price">$39.99</p>
-                        <a href="promociones.html">
-                        <button class="offer-button">Ver Oferta</button>
-                        </a>
-                    </div>
-                </div>
-                <div class="cafe-box">
-                    <img src="/static/Img/aguacate.jpg" alt="Producto destacado" class="box-image">
-                    <div class="box-overlay">
-                        <h3>Producto Destacado</h3>
-                        <p class="discount-price">$50.00</p>
-                    </div>
-                </div>
-                <div class="cafe-box">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.742141660058!2d-99.05548712501452!3d19.380314781887943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fd0614558e4b%3A0x3760847a107a0b9f!2sTecNM%20%7C%20Tecnol%C3%B3gico%20Nacional%20de%20M%C3%A9xico%20Campus%20Iztapalapa!5e0!3m2!1ses!2smx!4v1743483035853!5m2!1ses!2smx" class="box-map" allowfullscreen="" loading="lazy"></iframe>
-                    <div class="box-overlay">
-                        <h3>Nuestra Ubicación</h3>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="content-section">
-                <div class="text-content">
-                    <h2>Nuestros Productos</h2>
-                    <p>Descubre la mayor variedad de productos frescos de productores locales. Apoyamos la economía de nuestra región, ofreciéndote calidad y precios justos.</p>
-                </div>
-                <div class="image-content">
-                    <img src="/static/Img/Sabor.png" alt="Producto de muestra" class="content-image">
-                </div>
-            </div>
+            <section class="highlight-section">
+                <img src="/static/Img/jitomate.jpg" alt="Productos Frescos">
+                <h2 class="highlight-title">La Frescura que Mereces</h2>
+                <p class="highlight-text">Descubre la calidad superior de nuestros productos locales, cultivados con pasión y cuidado para llevar a tu mesa el sabor auténtico de la región.</p>
+                <a href="/CA" class="offer-button">Explorar Catálogo</a>
+            </section>
+
+            <section class="offer-section">
+                <h2 class="offer-title">¡Sabor Local!</h2>
+                <p class="offer-details">La marca numero 1 de todo mexico<span style="font-weight: bold; color: #d65a31;">Calidad y frescura todos los dias</span> Para que lleves a casa lo mejor del campo</p>
+                
+            </section>
+
+            <section class="highlight-section">
+                <img src="/static/Img/aguacate.jpg" alt="Productores Locales">
+                <h2 class="highlight-title">Apoyando lo Nuestro</h2>
+                <p class="highlight-text">Trabajamos directamente con productores locales, fomentando la economía de nuestra comunidad y garantizando productos frescos y de la más alta calidad.</p>
+                <a href="/P" class="offer-button">Pedidos</a>
+            </section>
         </main>
+
         <div class="footer">
             <a href="#"><i class="fab fa-facebook-f"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
@@ -96,29 +365,38 @@
             <a href="#"><i class="fas fa-envelope"></i></a>
         </div>
     </div>
+    <script src="/static/Js/buscador.js"></script>
+    <script src="/static/Js/contador.js"></script>
+    <script src="/static/Js/iconousuario.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('searchInput');
-            const searchButton = document.getElementById('searchButton');
+  document.addEventListener("DOMContentLoaded", function() {
+    const searchButton = document.getElementById("searchButton");
+    const searchInput = document.getElementById("searchInput");
 
-            searchButton.addEventListener('click', function() {
-                const searchTerm = searchInput.value.toLowerCase();
-                if (searchTerm) {
-                    // Redirigir a la página de catálogo con el término de búsqueda
-                    window.location.href = `catalogo.html?search=${searchTerm}`;
-                }
-            });
+    if (searchButton && searchInput) {
+        searchButton.addEventListener("click", function() {
+            const query = searchInput.value.trim().toLowerCase();
 
-            searchInput.addEventListener('keydown', function(event) {
-                if (event.key === 'Enter') {
-                    searchButton.click();
-                }
-            });
+            if (query.includes("carrito")) {
+                window.location.href = "/C";
+            } else if (query.includes("promociones") || query.includes("ofertas")) {
+                window.location.href = "/PC";
+            } else if (query.includes("pedidos")) {
+                window.location.href = "/P";
+            } else if (query.includes("catalogo")) {
+                window.location.href = "/CA";
+            } else {
+                alert("No se encontró ningún resultado para: " + query);
+            }
         });
-    </script>
-    <script src="/Js/contador.js"></script>
-    <script src="/Js/iconousuario.js"></script>
-    <script src="/Js/carrito.js"></script>
-    <script src="/Js/localstorage.js"></script>
+
+        searchInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                searchButton.click();
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>

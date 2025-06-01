@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forma de Pago</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #ade5b0; /* Fondo verde más fuerte */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .payment-container {
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-section h3 {
+            color: #1b5e20; /* Verde más oscuro */
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="number"],
+        .form-group input[type="time"],
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .payment-options input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .payment-options label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .payment-options img {
+            max-height: 30px;
+            margin-left: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .confirm-button, .regresar-button {
+            background-color: #1b5e20; /* Verde más oscuro */
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: auto;
+            box-sizing: border-box;
+        }
+
+        .confirm-button:hover, .regresar-button:hover {
+            background-color: #154c18;
+        }
+
+        .delivery-estimation {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fdfdfd;
+        }
+
+        .delivery-estimation h4 {
+            color: #1b5e20;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .delivery-options label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center; 
+            align-items: center;     
+            padding: 20px;
+        }
+
+        .logo {
+            width: 500px;  
+            height: auto;
+        }
+         #tarjeta {
+        display: none;
+    }
+
+    label[for="tarjeta"] {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        cursor: pointer;
+        transition: border-color 0.3s, background-color 0.3s;
+    }
+
+    label[for="tarjeta"]:hover {
+        border-color: #3498db;
+        background-color: #f0f8ff;
+    }
+
+    #tarjeta:checked + label {
+        border-color: #3498db;
+        background-color: #e6f2ff;
+    }
+
+    /* Estilo para la sección del formulario */
+    #formulario-tarjeta {
+        display: none;
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #fafafa;
+    }
+
+    #formulario-tarjeta label {
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+    }
+
+    #formulario-tarjeta input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    #formulario-tarjeta input:focus {
+        border-color: #3498db;
+        outline: none;
+        background-color: #f5faff;
+    }
+    .form-section.delivery-estimation {
+        margin-top: 30px;
+        padding: 20px;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        background-color: #fdfdfd;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .delivery-estimation h3 {
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+        color: #2c3e50;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 8px;
+    }
+
+    .delivery-options label {
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+        color: #34495e;
+    }
+
+    .delivery-options select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background-color: #fff;
+        box-sizing: border-box;
+    }
+
+    .delivery-options select:focus {
+        outline: none;
+        border-color: #3498db;
+        background-color: #f4faff;
+    }
+
+    .delivery-options p {
+        margin: 5px 0;
+        color: #666;
+        font-size: 0.95rem;
+    }
+
+    .delivery-options ul {
+        list-style: disc;
+        padding-left: 20px;
+        margin-top: 10px;
+        color: #444;
+    }
+
+    .delivery-options ul li {
+        margin-bottom: 5px;
+    }
+    .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Para que no interfiera con la interacción */
+            z-index: -1; /* Detrás del contenido */
+        }
+
+        .fruit-icon {
+            position: absolute;
+            font-size: 1.5em;
+            animation: float 5s infinite alternate, moveAcross 20s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        @keyframes moveAcross {
+            0% { transform: translateX(-10vw); }
+            100% { transform: translateX(110vw); }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-background">
+        <div class="fruit-icon" style="left: 10%; top: 20%; color: #e67e22; font-size: 1.2em;"><i class="fas fa-carrot"></i></div>
+        <div class="fruit-icon" style="left: 30%; top: 70%; color: #c0392b;"><i class="fas fa-apple-alt"></i></div>
+        <div class="fruit-icon" style="left: 50%; top: 10%; color: #f1c40f; font-size: 1.8em;"><i class="fas fa-lemon"></i></div>
+        <div class="fruit-icon" style="left: 70%; top: 50%; color: #8e44ad;"><i class="fas fa-grape"></i></div>
+        <div class="fruit-icon" style="left: 90%; top: 30%; color: #27ae60;"><i class="fas fa-leaf"></i></div>
+        <div class="fruit-icon" style="left: 5%; top: 50%; color: #d35400;"><i class="fas fa-pepper-hot"></i></div>
+        <div class="fruit-icon" style="left: 20%; top: 80%; color: #1abc9c; font-size: 1.6em;"><i class="fas fa-seedling"></i></div>
+        <div class="fruit-icon" style="left: 40%; top: 35%; color: #34495e;"><i class="fas fa-eggplant"></i></div>
+        <div class="fruit-icon" style="left: 60%; top: 15%; color: #e67e22; font-size: 1.4em;"><i class="fas fa-pumpkin"></i></div>
+        <div class="fruit-icon" style="left: 80%; top: 65%; color: #f39c12;"><i class="fas fa-banana"></i></div>
+        <div class="fruit-icon" style="left: 15%; top: 45%; color: #9b59b6;"><i class="fas fa-stroopwafel"></i></div>
+        <div class="fruit-icon" style="left: 35%; top: 15%; color: #2ecc71;"><i class="fas fa-lime"></i></div>
+        <div class="fruit-icon" style="left: 55%; top: 85%; color: #c0392b; font-size: 1.3em;"><i class="fas fa-cherry"></i></div>
+        <div class="fruit-icon" style="left: 75%; top: 25%; color: #f1c40f;"><i class="fas fa-pineapple"></i></div>
+        <div class="fruit-icon" style="left: 95%; top: 55%; color: #16a085;"><i class="fas fa-corn"></i></div>
+    </div>
+    <form method="POST" action="/pago">
+    <input type="hidden" name="carrito" id="carritoInput">
+    <div class="payment-container">
+        <h2>Forma de Pago</h2>
+        <div class="logo-container">
+            <a href="/sesion">
+                <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+            </a>
+        </div>
+
+
+        <div class="form-section">
+            <h3>Dirección de Entrega</h3>
+            <div class="form-group">
+                <label for="address">Calle y Número</label>
+                <input type="text" id="address" name="direccion" placeholder="Ej: Calle Falsa 123">
+            </div>
+            <div class="form-group">
+                <label for="colony">Colonia</label>
+                <select id="colony" name="colonia" class="form-control">
+                    <option value="">Selecciona una colonia</option>
+                    {% for colonia in colonias %}
+                        <option value="{{ colonia }}">{{ colonia }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="city">Ciudad</label>
+                <input type="text" id="city" name="ciudad" placeholder="Ej: Ciudad de México">
+            </div>
+            <div class="form-group">
+                <label for="zip">Código Postal</label>
+                <input type="text" id="zip" name="cp" placeholder="Ej: 06000">
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>Horario de Entrega Deseado (Opcional)</h3>
+            <div class="form-group">
+                <label for="delivery_time">Hora Preferida</label>
+                <input type="time" id="delivery_time" name="entrega">
+                <small>Puedes especificar una hora aproximada para tu entrega.</small>
+            </div>
+            <div class="form-group">
+                <label for="delivery_notes">Notas Adicionales (Opcional)</label>
+                <input type="text" id="delivery_notes" name="nota" placeholder="Ej: Entre la calle">
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>Datos Personales</h3>
+            <div class="form-group">
+                <label for="name">Nombre Completo</label>
+                <input type="text" id="name" name="nombre" placeholder="Tu nombre completo">
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="correo" placeholder="Tu correo electrónico">
+            </div>
+        </div>
+
+        <div class="form-section">
+    <h3>Forma de Pago</h3>
+    <div class="payment-options">
+      
+        <input type="radio" id="tarjeta" name="pago" value="tarjeta" onclick="mostrarFormularioTarjeta(true)">
+        <label for="tarjeta">
+            <img src="https://cdn-icons-png.flaticon.com/512/633/633611.png" alt="Tarjeta de crédito" style="width:40px;">
+            Pagar con Tarjeta de Crédito/Debito
+        </label>
+    </div>
+
+   
+    <div id="formulario-tarjeta" style="display: none; margin-top: 15px;">
+        <label for="numero-tarjeta">Número de Tarjeta:</label><br>
+        <input type="text" id="numero-tarjeta" name="numero_tarjeta" maxlength="16" placeholder="1234 5678 9012 3456" required><br><br>
+
+        <label for="cvv">Código de Seguridad (CVV):</label><br>
+        <input type="text" id="cvv" name="cvv" maxlength="4" placeholder="123" required><br><br>
+
+        
+        <label for="fecha-expiracion">Fecha de Vencimiento (MM/YY):</label><br>
+        <input type="text" id="fecha-expiracion" name="fecha_expiracion" placeholder="MM/YY" pattern="^(0[1-9]|1[0-2])\/\d{2}$" required><br><br>
+    </div>
+
+    </div>
+
+        <div class="form-section delivery-estimation">
+            <h3>Fecha Estimada de Entrega</h3>
+            <div class="delivery-options">
+                <label for="delivery_date">Selecciona tu fecha de entrega preferida:</label>
+                <select id="delivery_date" name="fecha">
+                    </select>
+                <p><small>Las entregas se realizan de [9:00 am] a [6:00 pm].</small></p>
+                <p>Posibles fechas de llegada:</p>
+                <ul id="possible_delivery_dates">
+                    </ul>
+            </div>
+        </div>
+            <!-- Aquí se mostrará el resumen de productos -->
+    <div id="lista-productos"></div>
+        <p>Total: <span id="total"></span></p>
+        <div class="button-container">
+            <button type="button" class="regresar-button" onclick="window.location.href='/C'">Regresar al Carrito</button>
+            <button type="submit" class="confirm-button" id="buyNowButton">Confirmar Pedido</button>
+
+        </div>
+    </div>
+    </form>
+    <script>
+document.getElementById("buyNowButton").addEventListener("click", function (e) {
+    const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+    document.getElementById("carritoInput").value = JSON.stringify(
+        carrito.map(p => ({
+            nombre_producto: p.nombre,
+            precio: parseFloat(p.precio),       // asegúrate que sea número
+            cantidad: parseInt(p.cantidad)      // asegúrate que sea número
+        }))
+    );
+});
+</script>
+
+    <script>
+document.getElementById("buyNowButton").addEventListener("click", function (e) {
+    const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+
+    const form = this.closest("form");
+    const inputCarrito = document.getElementById("carritoInput");
+    inputCarrito.value = JSON.stringify(carrito);
+
+    // Luego continúa el envío normal del formulario
+});
+</script>
+
+<script>
+    function mostrarFormularioTarjeta(mostrar) {
+        const tarjetaForm = document.getElementById("formulario-tarjeta");
+        if (mostrar) {
+            tarjetaForm.style.display = "block";
+        }
+    }
+
+    // Ocultar formulario de tarjeta si se vuelve a seleccionar PayPal
+    document.getElementById("paypal").addEventListener("click", function () {
+        document.getElementById("formulario-tarjeta").style.display = "none";
+    });
+</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deliveryDateSelect = document.getElementById('delivery_date');
+            const possibleDeliveryDatesList = document.getElementById('possible_delivery_dates');
+            const today = new Date();
+            const deliveryDays = 3; // Número de días estimados para la entrega
+
+            // Generar opciones para la fecha de entrega preferida (próximos 5 días)
+            for (let i = 3; i <= 6; i++) {
+                const nextDay = new Date(today);
+                nextDay.setDate(today.getDate() + i);
+                const formattedDate = nextDay.toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                const option = document.createElement('option');
+                option.value = nextDay.toISOString().slice(0, 10); // Formato YYYY-MM-DD
+                option.textContent = formattedDate;
+                deliveryDateSelect.appendChild(option);
+            }
+
+            // Generar posibles fechas de llegada (simulación)
+            for (let i = 3; i <= deliveryDays; i++) {
+                const possibleDate = new Date(today);
+                possibleDate.setDate(today.getDate() + i);
+                const listItem = document.createElement('li');
+                listItem.textContent = possibleDate.toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                possibleDeliveryDatesList.appendChild(listItem);
+            }
+        });
+    </script>
+   
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+
+    const contenedor = document.getElementById('lista-productos');
+    const inputOculto = document.getElementById('carritoInput');
+    let total = 0;
+
+    carrito.forEach(producto => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+            <p><strong>${producto.nombre_producto}</strong></p>
+            <p>Precio: $${producto.precio}</p>
+            <p>Cantidad: ${producto.cantidad}</p>
+            <hr>
+        `;
+        contenedor.appendChild(div);
+        total += producto.precio * producto.cantidad;
+    });
+
+    document.getElementById('total').textContent = '$${total.toFixed(2)}';
+    inputOculto.value = JSON.stringify(carrito); // Se manda al backend
+});
+</script>
+
+<script>
+    fetch("/finalizar_pago", {
+        method: "POST",
+        body: JSON.stringify(datosDelPago),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            // Limpiar carrito si la compra fue exitosa
+            localStorage.removeItem("carrito");
+            localStorage.removeItem("carrito_total");
+            localStorage.removeItem("carrito_cantidad");
+
+            const cartCount = document.getElementById("cart-count");
+            if (cartCount) {
+                cartCount.innerText = "0";
+            }
+
+            // Redirigir
+            window.location.href = "/gracias";
+        } else {
+            alert("Hubo un error al procesar tu compra.");
+        }
+    });
+</script>
+
+</body>
+</html>

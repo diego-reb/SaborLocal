@@ -1,37 +1,150 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header Moderno</title>
-    <link rel="stylesheet" href="/static/Css/stylee.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<head>
+<title>Iniciar Sesión Sabor Local</title>
+<style>
+  body {
+    background-color: #d8e8d5;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .container {
+    width: 600px;
+    height: 650px;
+    background-color: #b4ddb4;
+    padding: 50px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  h2 {
+    color: #333;
+    font-size: 28px;
+  }
+  label {
+    display: block;
+    margin-top: 25px;
+    color: #333;
+    font-size: 18px;
+  }
+  input[type="text"],
+  input[type="password"] {
+    width: 95%;
+    padding: 18px;
+    margin: 20px 0 30px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 18px;
+  }
+  button {
+    background-color: #165c16;
+    color: white;
+    padding: 18px 35px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .signup-link {
+    margin-top: 30px;
+    font-size: 18px;
+  }
+  a {
+    color: #164f16;
+    font-size: 18px;
+  }
+  .header {
+    background-color: #2f792f;
+    padding: 25px;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .header-content {
+    background-color: #2f792f;
+    padding: 5px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .header img {
+    height: 80px;
+    margin-right: 25px;
+  }
+  .header h1 {
+    margin: 0;
+    color: white;
+    font-size: 32px;
+  }
+  /* Estilos para los mensajes flash */
+  .alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 16px;
+    text-align: left; /* Alinea el texto a la izquierda para mejor lectura */
+  }
+  .alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+  }
+  .alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+  }
+  .alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+  }
+</style>
 </head>
-
-  
-
 <body>
   <div class="container">
     <div class="header">
       <div class="header-content">
-        <img src="/static/Img/Sabor.png" alt="Logo de Sabor Local">
+        <a href="/">
+          <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+        </a>
         <h1>Sabor Local</h1>
       </div>
     </div>
     <div>
       <h2>INICIAR SESION</h2>
-      <form>
-        <label for="correo">Correo electronico / Numero de telefono:</label>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div>
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      <form method="POST" action="/login">
+        <label for="correo">Correo electronico:</label>
         <input type="text" id="correo" name="correo" required>
 
         <label for="contrasena">Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena" required>
-
-        <button type="submit">INICIAR SESION</button>
+        <input type="password" id="contrasena" name="contraseña" required> <button type="submit">INICIAR SESION</button>
       </form>
     </div>
     <div class="signup-link">
-      <p>¿Eres nuevo? <a href="registro.html">Crea tu cuenta en SaborLocal</a></p>
+      <a href="/registro" class="boton-registro">Crea tu cuenta en SaborLocal</a>
     </div>
   </div>
 </body>

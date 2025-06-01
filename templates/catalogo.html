@@ -6,157 +6,396 @@
     <title>Header Moderno</title>
     <link rel="stylesheet" href="/static/Css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <style>
+    /* Contenedor general para mantener el footer abajo */
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #8efb9c;
+    }
+
+    .wrapper {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main {
+        flex: 1;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+        padding: 20px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .product {
+        border: 1px solid #054429;
+        border-radius: 8px;
+        padding: 1px;
+        text-align: center;
+        background: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .product img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .product h3 {
+        margin: 10px 0;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .product .price {
+        font-weight: bold;
+        color: #2e8b57;
+        margin: 10px 0;
+        font-size: 18px;
+    }
+
+    .add-to-cart {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 14px;
+        transition: background 0.3s;
+    }
+
+    .add-to-cart:hover {
+        background-color: #45a049;
+    }
+
+    .kilos-selector {
+        margin: 10px 0;
+    }
+
+    select {
+        padding: 5px;
+        width: 100%;
+        border-radius: 5px;
+    }
+
+    .sabor-local-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sabor-local-container img {
+        margin-left: 8px;
+        height: 24px;
+        vertical-align: middle;
+    }
+
+    h1 {
+        color: bisque;
+    }
+
+    /* FOOTER */
+    .footer {
+        background-color: #09af35;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        flex-shrink: 0;
+    display: flex;
+    }
+     .footer a {
+    margin: 0 15px; /* Aumenta el margen */
+    color: #333;
+    font-size: 1.8em; /* Aumenta el tamaño de la fuente */
+  }  
+</style>
+
 </head>
 <body>
+    <div class="Layout">
     <header>
         <div class="logo-container">
-            <a href="/templates/index.html">
-                <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
-            </a>
+            <a href="/"><img src="/static/Img/Sabor.png" alt="Logo" class="logo"></a>
         </div>
-        
         <div class="search-container">
             <input type="text" placeholder="Buscar..." class="search-input" id="searchInput">
             <button class="search-button" id="searchButton">
                 <i class="fas fa-search"></i>
             </button>
         </div>
-        
-       
         <div class="cart-container">
-            <a href="carrito.html">
+            <a href="/C">
                 <i class="fas fa-shopping-cart cart-icon"></i>
             </a>
             <span id="cart-count">0</span>
         </div>
-        
         <div class="user-menu">
             <div class="user-icon" id="userIcon">
                 <i class="fas fa-user-circle"></i>
             </div>
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="#"><i class="fas fa-cog"></i> Configuración</a>
-                <a href="login.html"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-            </div>
+
+    {% if 'cliente_id' in session %}
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    {% else %}
+        <a href="/sesion"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+    {% endif %}
+</div>
         </div>
     </header>
 
     <nav class="main-menu">
         <ul>
-            <li><a href="catalogo.html"><i class="fas fa-book"></i> Catálogo</a></li>
-            <li><a href="promociones.html"><i class="fas fa-tag"></i> Promociones</a></li>
-            <li><a href="pedidos.html"><i class="fas fa-clipboard-list"></i> Pedidos</a></li>
-            
+            <li><a href="/CA"><i class="fas fa-book"></i> Catálogo</a></li>
+            <li class="sabor-local-container">
+                <h1> Sabor Local</h1>
+                
+            </li>
+            <li><a href="/P"><i class="fas fa-clipboard-list"></i> Pedidos</a></li>
         </ul>
     </nav>
 
     <main class="container" id="productList">
-        <div class="product" id="productsList">
+        <div class="product" data-price="10.00">
             <img src="/static/Img/jitomate.jpg" alt="jitomate">
             <h3>Jitomate Frescos</h3>
+            <div class="kilos-selector">
+                <select class="kilo-select">
+                    <option value="1">1 kg</option>
+                    <option value="2">2 kg</option>
+                    <option value="3">3 kg</option>
+                    <option value="4">4 kg</option>
+                    <option value="5">5 kg</option>
+                    <option value="6">6 kg</option>
+                    <option value="7">7 kg</option>
+                    <option value="8">8 kg</option>
+                    <option value="9">9 kg</option>
+                    <option value="10">10 kg</option>
+                </select>
+            </div>
             <div class="price">$10.00</div>
             <button class="add-to-cart">Agregar al carrito</button>
         </div>
+        <div class="product" data-price="15.00">
+    <img src="/static/Img/uvas.jpg" alt="Uvas">
+    <h3>Uvas Dulces</h3>
+    <div class="kilos-selector">
+        <select class="kilo-select">
+            <option value="1">1 kg</option>
+            <option value="2">2 kg</option>
+            <option value="3">3 kg</option>
+            <option value="4">4 kg</option>
+            <option value="5">5 kg</option>
+            <option value="6">6 kg</option>
+            <option value="7">7 kg</option>
+            <option value="8">8 kg</option>
+            <option value="9">9 kg</option>
+            <option value="10">10 kg</option>
+        </select>
+    </div>
+    <div class="price">$15.00</div>
+    <button class="add-to-cart">Agregar al carrito</button>
+</div>
 
-        <div class="product">
-            <img src="/static/Img/uvas.jpg" alt="Uvas">
-            <h3>Uvas Dulces</h3>
-            <div class="price">$15.00</div>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </div>
+<div class="product" data-price="20.00">
+    <img src="/static/Img/zanahoria.jpg" alt="Zanahorias">
+    <h3>Zanahorias</h3>
+    <div class="kilos-selector">
+        <select class="kilo-select">
+            <option value="1">1 kg</option>
+            <option value="2">2 kg</option>
+            <option value="3">3 kg</option>
+            <option value="4">4 kg</option>
+            <option value="5">5 kg</option>
+            <option value="6">6 kg</option>
+            <option value="7">7 kg</option>
+            <option value="8">8 kg</option>
+            <option value="9">9 kg</option>
+            <option value="10">10 kg</option>
+        </select>
+    </div>
+    <div class="price">$20.00</div>
+    <button class="add-to-cart">Agregar al carrito</button>
+</div>
 
-        <div class="product">
-            <img src="/static/Img/zanahoria.jpg" alt="Zanahorias">
-            <h3>Zanahorias</h3>
-            <div class="price">$80.0</div>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </div>
+<div class="product" data-price="12.00">
+    <img src="/static/Img/huevo.jpg" alt="Huevos">
+    <h3>Huevos Frescos</h3>
+    <div class="kilos-selector">
+        <select class="kilo-select">
+            <option value="1">1 kg</option>
+            <option value="2">2 kg</option>
+            <option value="3">3 kg</option>
+            <option value="4">4 kg</option>
+            <option value="5">5 kg</option>
+            <option value="6">6 kg</option>
+            <option value="7">7 kg</option>
+            <option value="8">8 kg</option>
+            <option value="9">9 kg</option>
+            <option value="10">10 kg</option>
+        </select>
+    </div>
+    <div class="price">$12.00</div>
+    <button class="add-to-cart">Agregar al carrito</button>
+</div>
 
-        <div class="product">
-            <img src="/static/Img/huevo.jpg" alt="Huevos">
-            <h3>Huevos Frescos</h3>
-            <div class="price">$12.00</div>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </div>
+<div class="product" data-price="9.00">
+    <img src="/static/Img/Manzana.jpg" alt="Manzanas">
+    <h3>Manzanas</h3>
+    <div class="kilos-selector">
+        <select class="kilo-select">
+            <option value="1">1 kg</option>
+            <option value="2">2 kg</option>
+            <option value="3">3 kg</option>
+            <option value="4">4 kg</option>
+            <option value="5">5 kg</option>
+            <option value="6">6 kg</option>
+            <option value="7">7 kg</option>
+            <option value="8">8 kg</option>
+            <option value="9">9 kg</option>
+            <option value="10">10 kg</option>
+        </select>
+    </div>
+    <div class="price">$9.00</div>
+    <button class="add-to-cart">Agregar al carrito</button>
+</div>
 
-        <div class="product">
-            <img src="/static/Img/Manzana.jpg" alt="Manzanas">
-            <h3>Manzanas</h3>
-            <div class="price">$9.00</div>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </div>
+<div class="product" data-price="7.00">
+    <img src="/static/Img/pan.png" alt="Pan">
+    <h3>Pan Integral</h3>
+    <div class="kilos-selector">
+        <select class="kilo-select">
+            <option value="1">1 kg</option>
+            <option value="2">2 kg</option>
+            <option value="3">3 kg</option>
+            <option value="4">4 kg</option>
+            <option value="5">5 kg</option>
+            <option value="6">6 kg</option>
+            <option value="7">7 kg</option>
+            <option value="8">8 kg</option>
+            <option value="9">9 kg</option>
+            <option value="10">10 kg</option>
+        </select>
+    </div>
+    <div class="price">$7.00</div>
+    <button class="add-to-cart">Agregar al carrito</button>
+</div>
 
-        <div class="product">
-            <img src="/static/Img/pan.png" alt="Pan">
-            <h3>Pan Integral</h3>
-            <div class="price">$7.00</div>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </div>
+<div class="product" data-price="11.00">
+    <img src="/static/Img/lechuga.png" alt="Lechuga">
+    <h3>Lechuga</h3>
+    <div class="kilos-selector">
+        <select class="kilo-select">
+            <option value="1">1 kg</option>
+            <option value="2">2 kg</option>
+            <option value="3">3 kg</option>
+            <option value="4">4 kg</option>
+            <option value="5">5 kg</option>
+            <option value="6">6 kg</option>
+            <option value="7">7 kg</option>
+            <option value="8">8 kg</option>
+            <option value="9">9 kg</option>
+            <option value="10">10 kg</option>
+        </select>
+    </div>
+    <div class="price">$11.00</div>
+    <button class="add-to-cart">Agregar al carrito</button>
+</div>
 
-        <div class="product">
-            <img src="/static/Img/lechuga.png" alt="Lechuga">
-            <h3>Lechuga</h3>
-            <div class="price">$11.00</div>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </div>
+<div class="product" data-price="18.00">
+    <img src="/static/Img/sandia.png" alt="Sandia">
+    <h3>Sandia</h3>
+    <div class="kilos-selector">
+        <select class="kilo-select">
+            <option value="1">1 kg</option>
+            <option value="2">2 kg</option>
+            <option value="3">3 kg</option>
+            <option value="4">4 kg</option>
+            <option value="5">5 kg</option>
+            <option value="6">6 kg</option>
+            <option value="7">7 kg</option>
+            <option value="8">8 kg</option>
+            <option value="9">9 kg</option>
+            <option value="10">10 kg</option>
+        </select>
+    </div>
+    <div class="price">$18.00</div>
+    <button class="add-to-cart">Agregar al carrito</button>
+</div>
 
-        <div class="product">
-            <img src="/static/Img/sandia.png" alt="Sandia">
-            <h3>Sandia</h3>
-            <div class="price">$18.00</div>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </div>
+<div class="product" data-price="22.00">
+    <img src="/static/Img/papaya.png" alt="papaya">
+    <h3>Papaya</h3>
+    <div class="kilos-selector">
+        <select class="kilo-select">
+            <option value="1">1 kg</option>
+            <option value="2">2 kg</option>
+            <option value="3">3 kg</option>
+            <option value="4">4 kg</option>
+            <option value="5">5 kg</option>
+            <option value="6">6 kg</option>
+            <option value="7">7 kg</option>
+            <option value="8">8 kg</option>
+            <option value="9">9 kg</option>
+            <option value="10">10 kg</option>
+        </select>
+    </div>
+    <div class="price">$22.00</div>
+    <button class="add-to-cart">Agregar al carrito</button>
+</div>
 
-        <div class="product">
-            <img src="/static/Img/papaya.png" alt="papaya">
-            <h3>Papaya</h3>
-            <div class="price">$22.00</div>
-            <button class="add-to-cart">Agregar al carrito</button>
+<div class="product" data-price="15.00">
+    <img src="/static/Img/arroz.jpg" alt="Arroz">
+    <h3>Arroz Blanco</h3>
+    <div class="kilos-selector">
+        <select class="kilo-select">
+            <option value="1">1 kg</option>
+            <option value="2">2 kg</option>
+            <option value="3">3 kg</option>
+            <option value="4">4 kg</option>
+            <option value="5">5 kg</option>
+            <option value="6">6 kg</option>
+            <option value="7">7 kg</option>
+            <option value="8">8 kg</option>
+            <option value="9">9 kg</option>
+            <option value="10">10 kg</option>
+        </select>
+    </div>
+    <div class="price">$15.00</div>
+    <button class="add-to-cart">Agregar al carrito</button>
+</div>
+{% for producto in productos %}
+    <div class="product"
+         data-name="{{ producto.nombre }}"
+         data-price="{{ producto.precio }}"
+         data-image="{{ producto.imagen }}">
+        <img src="data:image/jpeg;base64,{{ producto.imagen }}" alt="{{ producto.nombre }}">
+        <h3>{{ producto.nombre }}</h3>
+        <div class="kilos-selector">
+            <select class="kilo-select">
+                {% for i in range(1, 11) %}
+                    <option value="{{ i }}">{{ i }} kg</option>
+                {% endfor %}
+            </select>
         </div>
+        <div class="price">${{ "%.2f"|format(producto.precio) }}</div>
+        <button class="add-to-cart">Agregar al carrito</button>
+    </div>
+    {% endfor %} 
 
-        <div class="product">
-            <img src="/static/Img/arroz.jpg" alt="Arroz">
-            <h3>Arroz Blanco</h3>
-            <div class="price">$6.00</div>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </div>
 
-        <div class="product">
-            <img src="/static/Img/frijoles.png" alt="Frijoles">
-            <h3>Frijoles Negros</h3>
-            <div class="price">$5.00</div>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </div>
-
-        <div class="product">
-            <img src="/static/Img/aguacate.jpg" alt="Aguacate">
-            <h3>Aguacates</h3>
-            <div class="price">$14.00</div>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </div>
-
-        <div class="product">
-            <img src="/static/Img/limon.jpg" alt="Limones">
-            <h3>Limones</h3>
-            <div class="price">$4.00</div>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </div>
-
-        <div class="product">
-            <img src="/static/Img/Cebolla.png" alt="Cebolla">
-            <h3>Cebollas</h3>
-            <div class="price">$3.00</div>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </div>
-
-        <div class="product">
-            <img src="/static/Img/ajo.jpg" alt="Ajo">
-            <h3>Ajo</h3>
-            <div class="price">$2.50</div>
-            <button class="add-to-cart">Agregar al carrito</button>
-        </div>
-    </main>
+        </main>
 
     <footer class="site-footer">
         <div class="footer">
@@ -166,11 +405,97 @@
             <a href="#"><i class="fas fa-envelope"></i></a>
         </div>
     </footer>
-    <script src="/Js/buscador.js"></script>
-    <script src="/Js/contador.js"></script>
-    <script src="/Js/iconousuario.js"></script>
-    <script src="/Js/carrito.js"></script>
-    <script src="/Js/localstorage.js"></script>
-    <script src="/Js/ProductosCarrito.js"></script>
+</div>
+    <script>
+document.querySelectorAll('.product').forEach(product => {
+    const priceElement = product.querySelector('.price');
+    const select = product.querySelector('.kilo-select');
+    const basePrice = parseFloat(product.getAttribute('data-price'));
+
+    select.addEventListener('change', () => {
+        const kilos = parseInt(select.value);
+        const total = basePrice * kilos;
+        priceElement.textContent = `$${total.toFixed(2)}`;
+    });
+});
+</script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('pago_exitoso') === 'True') {
+        localStorage.removeItem("carrito");
+        localStorage.removeItem("carrito_cantidad");
+        localStorage.removeItem("carrito_total");
+
+        const cartCount = document.getElementById("cart-count");
+        if (cartCount) {
+            cartCount.innerText = "0";
+        }
+    }
+</script>
+
+<script>
+document.querySelectorAll(".add-to-cart").forEach(button => {
+    button.addEventListener("click", function () {
+        const nombre = this.getAttribute("data-nombre");
+        const precio = parseFloat(this.getAttribute("data-precio"));
+        const cantidadInput = this.parentElement.querySelector(".cantidad-input");
+        const cantidad = parseInt(cantidadInput.value);
+
+        if (!cantidad || cantidad < 1) return;
+
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        // Verificar si el producto ya está en el carrito
+        const productoExistente = carrito.find(p => p.nombre === nombre);
+
+        if (productoExistente) {
+            productoExistente.cantidad += cantidad;
+        } else {
+            carrito.push({ nombre, precio, cantidad });
+        }
+
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+
+        // ACTUALIZA LA BD
+        fetch("/agregar_producto_carrito", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nombre: nombre,
+                precio: precio,
+                cantidad: cantidad
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("Guardado en BD:", data);
+        })
+        .catch(err => {
+            console.error("Error al guardar producto en la base:", err);
+        });
+
+        // Actualizar contador
+        const cantidadTotal = carrito.reduce((sum, p) => sum + p.cantidad, 0);
+        localStorage.setItem("carrito_cantidad", cantidadTotal);
+
+        // Actualizar total
+        const total = carrito.reduce((sum, p) => sum + p.precio * p.cantidad, 0);
+        localStorage.setItem("carrito_total", total.toFixed(2));
+
+        // Actualizar contador visual
+        document.getElementById("cart-count").innerText = cantidadTotal;
+    });
+});
+</script>
+
+
+    <script src="/static/Js/buscador.js"></script>
+    <script src="/static/Js/contador.js"></script>
+    <script src="/static/Js/iconousuario.js"></script>
+    <script src="/static/Js/carrito.js"></script>
+    <script src="/static/Js/localstorage.js"></script>
+    <script src="/static/Js/ProductosCarrito.js"></script>
 </body>
 </html>

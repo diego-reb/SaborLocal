@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor Local - Mis Productos</title>
+    <link rel="stylesheet" href="/static/Css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8f0; /* Un color de fondo claro */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #319731; /* Verde claro similar al header */
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .search-bar {
+            display: flex;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            width: 200px;
+        }
+
+        .search-bar button {
+            background-color: #d0e1d0;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .search-bar button i { /* Estilo para el icono de buscar */
+            font-size: 20px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-icon {
+            height: 30px;
+            margin-right: 5px;
+            display: flex; /* Para centrar el icono */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-icon i { /* Estilo para el icono de usuario */
+            font-size: 30px;
+        }
+
+       main {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .products-table {
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
+            border-collapse: collapse;
+        }
+
+        .products-table th, .products-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .products-table th {
+            background-color: #319731;
+            color: white;
+        }
+
+        .products-table td {
+            background-color: #e0eee0;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .action-button {
+            padding: 5px 10px;
+            border-radius: 3px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .action-button.edit {
+            background-color: #FFA500;
+        }
+
+        .action-button.delete {
+            background-color: #FF5733;
+        }
+
+        footer {
+            background-color: #319731;
+            padding: 10px;
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+            margin: 0 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="/V"><img src="/static/Img/Sabor.png" alt="Logo" class="logo"></a>
+        </div>
+        
+       
+        
+        
+        
+         <div class="user-menu">
+            <div class="user-icon" id="userIcon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="dropdown-menu" id="dropdownMenu">
+                {% if 'vendedor_id' in session %}
+                    <a href="/logoutV"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                {% else %}
+                    <a href="/LoginVen"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-menu">
+        <ul>
+            <li><a href="/CV"><i class="fas fa-book"></i> Mis productos</a></li>
+            <li><a href="/AP"><i class="fas fa-tag"></i> Agregar Producto</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div style="width: 100%;">
+            <h2 style="text-align:center;">Mis Productos</h2>
+            <table class="products-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Categoría</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                        <tr>
+                            <td>{{ producto.id_pro }}</td>
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.descripcion }}</td>
+                            <td>${{ producto.precio }}</td>
+                            <td>{{ producto.categoria }}</td>
+                            <td>
+                                {% if producto.imagen %}
+                                    <img src="data:image/jpeg;base64,{{ producto.imagen }}" alt="Imagen de {{ producto.nombre }}" width="50" height="50">
+                                {% else %}
+                                    <p>No hay imagen disponible</p>
+                                {% endif %}
+                            </td>
+                            <td class="actions">
+                                <form action="{{ url_for('eliminar_producto', id_pro=producto.id_pro) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="action-button delete">Eliminar</button>
+                                </form>
+                               <a href="{{ url_for('editar_producto_vendedor', id_pro=producto.id_pro) }}" 
+   style="padding: 6px 12px; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px;">
+   Editar
+</a>
+
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fas fa-phone"></i></a>
+        <a href="#"><i class="fas fa-envelope"></i></a>
+    </footer>
+
+    <script src="/static/Js/buscador.js"></script>
+    <script src="/static/Js/contador.js"></script>
+    <script src="/static/Js/iconousuario.js"></script>
+    <script src="/static/Js/carrito.js"></script>
+    <script src="/static/Js/localstorage.js"></script>
+    <script src="/static/Js/ProductosCarrito.js"></script>
+</body>
+</html>

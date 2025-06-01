@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f8fb;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #157718;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 30px;
+        }
+        .logo-container .logo {
+            height: 50px;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 25px;
+            padding: 5px 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .search-input {
+            border: none;
+            outline: none;
+            padding: 8px 10px;
+            border-radius: 20px;
+            font-size: 1em;
+        }
+        .search-button {
+            background: none;
+            border: none;
+            color: #157718;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 40px 30px;
+        }
+        .tabla h1 {
+            color: #FFD700;
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            font-style: italic;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: #fafafa;
+        }
+        th, td {
+            padding: 14px 10px;
+            text-align: center;
+        }
+        th {
+            background: #208f24;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        td {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        tr:nth-child(even) td {
+            background: #f1f8e9;
+        }
+        a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: #bfa100;
+            text-decoration: underline;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .button {
+            background: linear-gradient(90deg, #208f24 60%, #FFD700 100%);
+            color: #fff;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(32,143,36,0.08);
+            transition: background 0.3s, color 0.3s;
+        }
+        .button:hover {
+            background: linear-gradient(90deg, #FFD700 60%, #208f24 100%);
+            color: #208f24;
+        }
+        header .user-menu {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        header .user-menu .user-icon {
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        header .user-menu .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 120px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            display: none;
+        }
+        header .user-menu:hover .dropdown-menu {
+            display: block;
+        }
+        header .user-menu .dropdown-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        header .user-menu .dropdown-menu a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="/IA"><img src="/static/Img/Sabor.png" alt="Logo" class="logo"></a>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Buscar productos..." class="search-input">
+            <button class="search-button"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="user-menu">
+            <div class="user-icon"><i class="fas fa-user-circle"></i></div>
+            <div class="dropdown-menu">
+                <a href="/LoginAdmin"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="tabla">
+            <h1>Productos</h1>
+            <div class="button-container">
+                <button class="button" onclick="mostrarFormulario()">Agregar Producto</button>
+                <button class="button" onclick="window.location.href='/IA'">Regresar</button>
+            </div><br>
+            <!-- Formulario agregar -->
+            <div id="formulario-agregar" style="display:none; margin:30px auto; max-width:600px; background:#f9f9f9; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.08); padding:30px;">
+                <h2 style="color:#208f24; text-align:center;">Agregar Producto</h2>
+                <form action="/Apt" method="POST" enctype="multipart/form-data">
+                    <div style="margin-bottom:15px;">
+                        <label>Nombre:</label>
+                        <input type="text" name="nombre" required style="width:100%;padding:8px;">
+                    </div>
+                    <div style="margin-bottom:15px;">
+                        <label>Descripción:</label>
+                        <textarea name="descripcion" required style="width:100%;padding:8px;"></textarea>
+                    </div>
+                    <div style="margin-bottom:15px;">
+                        <label>Precio:</label>
+                        <input type="number" name="precio" step="0.01" required style="width:100%;padding:8px;">
+                    </div>
+                     <div style="margin-bottom:15px;">
+            <label>Categoría:</label>
+            <select name="categoria" id="edit-categoria" required style="width:100%;padding:8px;">
+                <option value="">Selecciona una categoría</option>
+                {% for cat in categorias %}
+                <option value="{{ cat.id }}">{{ cat.nombre }}</option>
+
+                {% endfor %}
+            </select>
+        </div>
+                    <div style="margin-bottom:15px;">
+                        <label>Imagen:</label>
+                        <input type="file" name="imagen" accept="image/*" style="width:100%;">
+                    </div>
+                    <div style="text-align:center;">
+                        <button class="button" type="submit">Guardar</button>
+                        <button class="button" type="button" style="background:#ccc;color:#333;" onclick="ocultarFormulario()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Formulario editar -->
+<div id="formulario-editar" style="display:none; margin:30px auto; max-width:600px; background:#f9f9f9; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.08); padding:30px;">
+    <h2 style="color:#208f24; text-align:center;">Editar Producto</h2>
+    <form action="/productoa/editar" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id_pro" id="edit-id">
+        <div style="margin-bottom:15px;">
+            <label>Nombre:</label>
+            <input type="text" name="nombre" id="edit-nombre" required style="width:100%;padding:8px;">
+        </div>
+        <div style="margin-bottom:15px;">
+            <label>Descripción:</label>
+            <textarea name="descripcion" id="edit-descripcion" required style="width:100%;padding:8px;"></textarea>
+        </div>
+        <div style="margin-bottom:15px;">
+            <label>Precio:</label>
+            <input type="number" name="precio" id="edit-precio" step="0.01" required style="width:100%;padding:8px;">
+        </div>
+        <div style="margin-bottom:15px;">
+            <label>Categoría:</label>
+            <select name="categoria" id="edit-categoria" required style="width:100%;padding:8px;">
+                <option value="">Selecciona una categoría</option>
+                {% for cat in categorias %}
+                <option value="{{ cat.id }}">{{ cat.nombre }}</option>
+
+                {% endfor %}
+            </select>
+        </div>
+        <div style="margin-bottom:15px;">
+            <label>Imagen (opcional):</label>
+            <input type="file" name="imagen" accept="image/*" style="width:100%;">
+        </div>
+        <div style="text-align:center;">
+            <button class="button" type="submit">Actualizar</button>
+            <button class="button" type="button" style="background:#ccc;color:#333;" onclick="ocultarFormularioEditar()">Cancelar</button>
+        </div>
+    </form>
+</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Categoría</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                    <tr>
+                        <td>{{ producto.id_pro }}</td>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.descripcion }}</td>
+                        <td>{{ producto.precio }}</td>
+                        <td>{{ producto.categoria }}</td>
+                        <td>
+                            {% if producto.imagen %}
+                            <img src="data:image/png;base64,{{ producto.imagen }}" alt="Imagen" style="max-width:60px; max-height:60px; border-radius:8px;">
+                            {% else %}
+                            Sin imagen
+                            {% endif %}
+                        </td>
+                        <td style="display:flex; gap:10px; justify-content:center;">
+                            <button class="button"
+    onclick="mostrarFormularioEditar('{{ producto.id_pro }}', '{{ producto.nombre }}', '{{ producto.descripcion }}', '{{ producto.precio }}', '{{ producto.categoria }}')">
+    Editar
+</button>
+
+                            <form action="/productoa/eliminar/{{ producto.id_pro }}" method="POST" style="display:inline;">
+    <button class="button" style="background-color:#FF0000;" onclick="eliminarProducto({{ producto.id_pro }})">Eliminar</button>
+</form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            
+
+            
+
+    </main>
+
+    <script>
+        function mostrarFormulario() {
+            document.getElementById('formulario-agregar').style.display = 'block';
+        }
+        function ocultarFormulario() {
+            document.getElementById('formulario-agregar').style.display = 'none';
+        }
+    </script>
+    <script>
+    function mostrarFormularioEditar(id, nombre, descripcion, precio, categoria) {
+        document.getElementById('edit-id').value = id;
+        document.getElementById('edit-nombre').value = nombre;
+        document.getElementById('edit-descripcion').value = descripcion;
+        document.getElementById('edit-precio').value = precio;
+        document.getElementById('edit-categoria').value = categoria;
+        document.getElementById('formulario-editar').style.display = 'block';
+        window.scrollTo({ top: document.getElementById('formulario-editar').offsetTop, behavior: 'smooth' });
+    }
+
+    function ocultarFormularioEditar() {
+        document.getElementById('formulario-editar').style.display = 'none';
+    }
+</script>
+<script>
+document.querySelector('#formulario-agregar form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch('/Apt', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert('Producto agregado correctamente');
+            location.reload();
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(err => alert('Error al agregar producto: ' + err));
+});
+</script>
+<script>
+document.querySelector('#formulario-editar form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch('/productoa/editar', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert('Producto actualizado correctamente');
+            location.reload();
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(err => alert('Error al actualizar producto: ' + err));
+});
+</script>
+<script>
+function eliminarProducto(id) {
+    if (!confirm('¿Estás seguro de eliminar este producto?')) return;
+    fetch(`/productoa/eliminar/${id}`, {
+        method: 'POST'
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert('Producto eliminado correctamente');
+            location.reload();
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(err => alert('Error al eliminar producto: ' + err));
+}
+</script>
+</body>
+</html>

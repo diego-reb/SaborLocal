@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor Local - Vendedor</title>
+    <link rel="stylesheet" href="/static/Css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8f0; /* Un color de fondo claro */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #338e33; /* Verde claro similar al header */
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .search-bar {
+            display: flex;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            width: 200px;
+        }
+
+        .search-bar button {
+            background-color: #77ab77;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .search-bar button i { /* Estilo para el icono de buscar */
+            font-size: 20px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-icon {
+            height: 30px;
+            margin-right: 5px;
+            display: flex; /* Para centrar el icono */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-icon i { /* Estilo para el icono de usuario */
+            font-size: 30px;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .welcome-section {
+            background-color: #e0eee0; /* Un tono más claro para la sección */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .welcome-message h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .welcome-message p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .illustration img {
+            max-width: 300px;
+            height: auto;
+        }
+
+        .actions {
+            display: flex;
+            gap: 20px;
+        }
+
+        .actions button {
+            background-color: #169c28; /* Verde más oscuro para los botones */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .actions button:hover {
+            background-color: #d3e10e;
+        }
+
+        footer {
+            background-color: #8fbc8f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icons a i { /* Cambiado a la etiqueta i para los iconos de Font Awesome */
+            font-size: 45px; /* ¡Iconos más grandes! Ajusta este valor si lo necesitas */
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="/V">
+                <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+            </a>
+        </div>
+        
+        
+
+       <div class="cart-container">
+
+
+<div class="user-menu">
+<div class="user-icon" id="userIcon">
+    <i class="fas fa-user-circle"></i>
+</div>
+<div class="dropdown-menu" id="dropdownMenu">
+
+    {% if 'vendedor_id' in session %}
+        <a href="/logoutV"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    {% else %}
+        <a href="/LoginVen"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+    {% endif %}
+</div>
+</div>
+    </header>
+    <main>
+        <section class="welcome-section">
+            <div class="welcome-message">
+                <h2>¡Hola! Bienvenido a Sabor Local</h2>
+                <p> Aqui te ayudaremos a vender tus productos de una manera mas fácil y cómoda</p>
+            </div>
+            <div class="illustration">
+                <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+            </div>
+        </section>
+
+        <section class="actions">
+            <button class="add-product-button" onclick="window.location.href='/AP'">
+                AGREGAR NUEVO PRODUCTO
+            </button>
+            <button class="my-products-button" onclick="window.location.href='/CV'">
+                MIS PRODUCTOS
+            </button>
+        </section>
+        
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fas fa-phone"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+</body>
+
+<script src="/static/Js/buscador.js"></script>
+<script src="/static/Js/contador.js"></script>
+<script src="/static/Js/iconousuario.js"></script>
+<script src="/static/Js/carrito.js"></script>
+<script src="/static/Js/localstorage.js"></script>
+<script src="/static/Js/ProductosCarrito.js"></script>
+
+</html>

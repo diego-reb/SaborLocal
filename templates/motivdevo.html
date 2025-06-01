@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivo de la Devolución</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #e0f7fa; /* Fondo verde claro general */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center; /* Centrar el contenido horizontalmente */
+        }
+
+        header {
+            background-color: #3e913e; /* Verde claro para la cabecera */
+            color: #333; /* Texto oscuro */
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            width: 100%; /* Ocupar todo el ancho */
+            box-sizing: border-box; /* Incluir padding y border en el ancho */
+            border-bottom: 1px solid #ccc; /* Línea divisoria inferior */
+            justify-content: flex-start; /* Alinea los elementos al inicio (izquierda) */
+            gap: 20px; /* Espacio entre logo y buscador */
+        }
+
+        header .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo-container a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #121111;
+        }
+
+        header .logo-container .logo {
+            max-height: 40px;
+            margin-right: 20px; /* Espacio entre el logo y el buscador */
+        }
+
+        header .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #f5f5dc; /* Beige claro para el buscador */
+            border-radius: 20px; /* Hacerlo más redondeado */
+            padding: 5px 15px; /* Añadir padding horizontal */
+            border: 1px solid #d2b48c; /* Borde café claro */
+            width: 60%; /* Ancho más pequeño */
+            max-width: 400px; /* Ancho máximo para que no crezca demasiado */
+        }
+
+        header .search-container .search-input {
+            border: none;
+            padding: 8px;
+            outline: none;
+            flex-grow: 1; /* Permite que el input crezca dentro del contenedor */
+            border-radius: 20px; /* Redondear el input también */
+        }
+
+        header .search-container .search-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px; /* Ajustar padding del botón */
+            color: #777;
+        }
+
+        header .search-container .fa-search {
+            font-size: 1em;
+            color: #777; /* Color del icono de la lupa */
+        }
+
+        .return-reason-container {
+            background-color: #f9f9f9; /* Fondo blanco para el contenido */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 80%;
+            max-width: 500px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2e7d32; /* Verde más fuerte para el título */
+            margin-bottom: 25px;
+        }
+
+        .reason-button {
+            background-color: #f0f8f0; /* Verde muy claro para los botones */
+            color: #333;
+            border: 1px solid #c3e6cb; /* Borde verde claro */
+            padding: 12px 20px;
+            margin-bottom: 10px; /* Reducido el margen */
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            text-align: left; /* Alinear el texto a la izquierda para el checkbox */
+            display: flex;
+            align-items: center;
+        }
+
+        .reason-button input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .reason-button.selected {
+            background-color: #d4edda; /* Verde más oscuro para la selección */
+            border-color: #c3e6cb;
+        }
+
+        .reason-button:hover {
+            background-color: #e0eee0; /* Verde aún más claro al pasar el ratón */
+        }
+
+        .add-reason-container {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .add-reason-container input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .add-reason-container button {
+            background-color: #5cb85c; /* Verde para el botón de agregar */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-reason-container button:hover {
+            background-color: #4cae4c;
+        }
+
+        .describe-reason-container {
+            margin-bottom: 20px;
+        }
+
+        .describe-reason-container label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .describe-reason-container textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: vertical; /* Permite ajustar la altura */
+        }
+
+        .send-button {
+            background-color: #5cb85c; /* Verde para el botón de enviar */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+            max-width: 200px; /* Ancho máximo del botón enviar */
+            margin: 0 auto 20px; /* Centrar el botón enviar y añadir margen inferior */
+        }
+
+        .send-button:hover {
+            background-color: #4cae4c;
+        }
+
+        .back-button-container {
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .back-button {
+            background-color: #f44336; /* Rojo para el botón de regresar */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #d32f2f;
+        }
+
+        footer.site-footer {
+            background-color: #1f701f; /* Verde claro para el pie de página */
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            margin-top: auto; /* Empuja el footer hacia abajo */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        footer.site-footer .footer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        footer.site-footer .footer a {
+            color: white;
+            font-size: 1.5em; /* Ajusta el tamaño de los iconos */
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="#">
+                <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="search-container">
+            <input type="text" placeholder="Buscar..." class="search-input" id="searchInput">
+            <button class="search-button" id="searchButton">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="return-reason-container">
+        <h2>Motivo de la Devolución</h2>
+        <div class="reason-button">
+            <input type="checkbox" id="descompuesto" value="Producto descompuesto">
+            <label for="descompuesto">Producto descompuesto</label>
+        </div>
+        <div class="reason-button">
+            <input type="checkbox" id="no_pedido" value="No fue lo que pedí">
+            <label for="no_pedido">No fue lo que pedí</label>
+        </div>
+        <div class="reason-button">
+            <input type="checkbox" id="cantidad_inesperada" value="Cantidad no esperada">
+            <label for="cantidad_inesperada">Cantidad no esperada</label>
+        </div>
+        <div class="reason-button otros-button">
+            <input type="checkbox" id="otros_check" value="Otros">
+            <label for="otros_check">Otros</label>
+        </div>
+
+        <div class="describe-reason-container" id="describe-otros" style="display: none;">
+            <label for="otro_motivo">Describe el motivo:</label>
+            <textarea id="otro_motivo" name="otro_motivo"></textarea>
+        </div>
+
+        <div class="add-reason-container">
+            <input type="text" id="nuevo_motivo" placeholder="Agregar otro motivo">
+            <button onclick="agregarNuevoMotivo()">Agregar</button>
+        </div>
+
+        <button class="send-button" id="enviar_devolucion">Enviar</button>
+    </div>
+
+    <div class="back-button-container">
+        <button class="back-button" onclick="window.history.back()">Regresar</button>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fas fa-phone"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        const reasonButtons = document.querySelectorAll('.reason-button');
+        const otrosCheck = document.getElementById('otros_check');
+        const describeOtros = document.getElementById('describe-otros');
+        const otroMotivoTextarea = document.getElementById('otro_motivo');
+        const enviarDevolucionButton = document.getElementById('enviar_devolucion');
+        const nuevoMotivoInput = document.getElementById('nuevo_motivo');
+        const returnReasonContainer = document.querySelector('.return-reason-container');
+        const motivosSeleccionados = [];
+
+        reasonButtons.forEach(button => {
+            const checkbox = button.querySelector('input[type="checkbox"]');
+            button.addEventListener('click', function(event) {
+                if (event.target !== checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                }
+            });
+            checkbox.addEventListener('change', function() {
+                if (this.id === 'otros_check') {
+                    describeOtros.style.display = this.checked ? 'block' : 'none';
+                }
+            });
+        });
+
+        function agregarNuevoMotivo() {
+            const nuevoMotivoTexto = nuevoMotivoInput.value.trim();
+            if (nuevoMotivoTexto !== '') {
+                const nuevoDiv = document.createElement('div');
+                nuevoDiv.classList.add('reason-button');
+                nuevoDiv.innerHTML = `
+                    <input type="checkbox" id="${nuevoMotivoTexto.replace(/\s+/g, '_').toLowerCase()}" value="${nuevoMotivoTexto}">
+                    <label for="${nuevoMotivoTexto.replace(/\s+/g, '_').toLowerCase()}">${nuevoMotivoTexto}</label>
+                `;
+                returnReasonContainer.insertBefore(nuevoDiv, document.querySelector('.add-reason-container'));
+
+                const nuevoCheckbox = nuevoDiv.querySelector('input[type="checkbox"]');
+                nuevoDiv.addEventListener('click', function(event) {
+                    if (event.target !== nuevoCheckbox) {
+                        nuevoCheckbox.checked = !nuevoCheckbox.checked;
+                    }
+                });
+
+                nuevoMotivoInput.value = '';
+            }
+        }
+
+        enviarDevolucionButton.addEventListener('click', function() {
+            motivosSeleccionados.length = 0; // Limpiar el array
+
+            reasonButtons.forEach(button => {
+                const checkbox = button.querySelector('input[type="checkbox"]');
+                if (checkbox.checked && checkbox.value !== 'Otros') {
+                    motivosSeleccionados.push(checkbox.value);
+                }
+            });
+
+            if (otrosCheck.checked && otroMotivoTextarea.value.trim() !== '') {
+                motivosSeleccionados.push('Otro: ' + otroMotivoTextarea.value.trim());
+            } else if (otrosCheck.checked && otroMotivoTextarea.value.trim() === '') {
+                alert('Por favor, describe el motivo en "Otros".');
+                return;
+            }
+
+            if (motivosSeleccionados.length > 0) {
+                console.log('Motivos de devolución enviados:', motivosSeleccionados);
+                alert('Tus motivos de devolución fueron enviados.');
+                // Aquí puedes implementar la lógica para enviar los motivos al servidor
+            } else {
+                alert('Por favor, selecciona al menos un motivo de devolución.');
+            }
+        });
+    </script>
+</body>
+</html>

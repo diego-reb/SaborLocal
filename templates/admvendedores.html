@@ -1,0 +1,585 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendedores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #e0f7fa; /* Fondo verde claro */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #4caf50; /* Verde oscuro de la cabecera */
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo-container a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+
+        header .logo-container .logo {
+            max-height: 40px;
+            margin-right: 20px; /* Espacio entre el logo y el buscador */
+        }
+
+        header .search-container {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 5px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            flex-grow: 1; /* Permite que el buscador crezca para ocupar el espacio */
+            margin-right: 20px; /* Espacio entre el buscador y el menú de usuario */
+        }
+
+        header .search-container .search-input {
+            border: none;
+            padding: 8px;
+            outline: none;
+            flex-grow: 1; /* Permite que el input crezca dentro del contenedor */
+        }
+
+        header .search-container .search-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            color: #777;
+        }
+
+        header .search-container .fa-search {
+            font-size: 1em;
+        }
+
+        header .user-menu {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        header .user-menu .user-icon {
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        header .user-menu .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 120px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            display: none; /* Initially hidden */
+        }
+
+        header .user-menu:hover .dropdown-menu {
+            display: block;
+        }
+
+        header .user-menu .dropdown-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        header .user-menu .dropdown-menu a:hover {
+            background-color: #ddd;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 95%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #f8f8f8;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden; /* Para que el border-radius funcione en la tabla */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50; /* Encabezados en verde */
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        td.acciones {
+            text-align: center;
+            display: flex; /* Añadimos flexbox al contenedor de los botones */
+            flex-direction: column; /* Alineamos los elementos en columna */
+            align-items: center; /* Centramos los elementos horizontalmente */
+        }
+
+        .editar-btn, .eliminar-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block; /* Lo cambiamos a inline-block para que ocupe solo el espacio necesario */
+            font-size: 0.9em;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px 0; /* Ajustamos el margen para el espaciado vertical */
+            transition: background-color 0.3s ease;
+            width: 80%; /* O un ancho fijo si prefieres */
+            box-sizing: border-box; /* Incluye el padding y el borde en el ancho */
+        }
+
+        .eliminar-btn {
+            background-color: #f44336;
+        }
+
+        .editar-btn:hover {
+            background-color: #45a049;
+        }
+
+        .eliminar-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .regresar-btn {
+            background-color: #4CAF50; /* Botón regresar en verde */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .regresar-btn:hover {
+            background-color: #45a049;
+        }
+
+        footer.site-footer {
+            background-color: #4caf50; /* Verde oscuro del pie de página */
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            margin-top: auto; /* Empuja el footer hacia abajo */
+        }
+
+        footer.site-footer .footer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        footer.site-footer .footer a {
+            color: white;
+            font-size: 1.5em; /* Ajusta el tamaño de los iconos */
+            text-decoration: none;
+        }
+
+        /* Estilos para la edición en línea */
+        .editable-cell {
+            padding: 0;
+        }
+
+        .editable-input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: none;
+            outline: none;
+        }
+
+        /* Estilos específicos para la columna de ESTATUS */
+        th:nth-child(5), /* Selecciona el quinto encabezado (ESTATUS) */
+        td:nth-child(5) { /* Selecciona la quinta celda de cada fila (ESTATUS) */
+            text-align: center; /* Centra el contenido del estatus */
+        }
+
+        .btn-estado {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btn-estado.activo {
+    background-color: #4caf50; /* verde */
+}
+
+.btn-estado.inactivo {
+    background-color: #f44336; /* rojo */
+}
+
+.btn-estado:hover {
+    opacity: 0.9;
+}
+.registrar-btn {
+    background-color: #2196f3;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="/IA">
+                <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+            </a>
+        </div>
+        
+        <div class="user-menu">
+            <div class="user-icon" id="userIcon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="login.html"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h2>VENDEDORES</h2>
+        <button onclick="mostrarFormularioRegistro()" class="registrar-btn">REGISTRAR VENDEDOR</button>
+        <button class="regresar-btn" onclick="window.location.href='/IA'">REGRESAR</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>NOMBRE</th>
+                    <th>TELEFONO</th>
+                    <th>CORREO</th>
+                    <th>ID</th>
+                    <th>ESTATUS</th>
+                    <th>ACCION</th>
+                </tr>
+            </thead>
+           {% for vendedor in vendedores %}
+<tr>
+    <td>{{ vendedor.nombre }}</td>
+    <td>{{ vendedor.telefono }}</td>
+    <td>{{ vendedor.correo }}</td>
+    <td>{{ vendedor.vendedor_id }}</td>
+    <td>
+    <button class="btn-estado {{ 'activo' if vendedor.activo else 'inactivo' }}"
+        onclick="cambiarEstado({{ vendedor.vendedor_id }}, this)">
+        {{ 'Activo' if vendedor.activo else 'Inactivo' }}
+    </button>
+</td>
+
+    <td>
+    <button class="editar-btn" onclick="modificarVendedor({{ vendedor.vendedor_id }}, '{{ vendedor.nombre }}', '{{ vendedor.telefono }}', '{{ vendedor.correo }}')">
+        MODIFICAR
+    </button>
+    <button class="eliminar-btn" onclick="eliminarVendedor({{ vendedor.vendedor_id }})">
+        ELIMINAR
+    </button>
+</td>
+</tr>
+{% endfor %}
+
+        </table>
+
+
+    </main>
+    
+
+    <footer class="site-footer">
+        <div class="footer">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fas fa-phone"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+
+    <script>
+// Función para cambiar el estado del vendedor
+function cambiarEstado(vendedorId, boton) {
+    fetch(`/toggle_estadov/${vendedorId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const activo = data.nuevo_estado;
+            boton.textContent = activo ? 'Activo' : 'Inactivo';
+            boton.classList.toggle('activo', activo);
+            boton.classList.toggle('inactivo', !activo);
+        } else {
+            alert('No se pudo cambiar el estado');
+        }
+    })
+    .catch(error => {
+        console.error('Error al cambiar el estado:', error);
+    });
+}
+
+// Función para eliminar al vendedor
+function eliminarVendedor(vendedorId) {
+    if (confirm('¿Estás seguro de que quieres eliminar este vendedor?')) {
+        fetch(`/eliminar_vendedor/${vendedorId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Eliminar la fila de la tabla
+                const row = document.querySelector(`button[data-id='${vendedorId}']`).closest('tr');
+                row.remove();
+                alert('Vendedor eliminado correctamente');
+            } else {
+                alert('Error al eliminar vendedor');
+            }
+        })
+        .catch(error => {
+            console.error('Error al eliminar el vendedor:', error);
+        });
+    }
+}
+</script>
+<script>
+function guardarRegistro() {
+    const nombre = document.getElementById('registroNombre').value;
+    const telefono = document.getElementById('registroTelefono').value;
+    const correo = document.getElementById('registroCorreo').value;
+    const contraseña = document.getElementById('registroContraseña').value;
+
+    fetch('/registrar_vendedor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, telefono, correo, contraseña })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Vendedor registrado correctamente');
+            cerrarFormularioRegistro();
+            location.reload();
+        } else {
+            alert('Error al registrar vendedor');
+        }
+    })
+    .catch(error => {
+        console.error('Error en la solicitud:', error);
+        alert('Error en la solicitud');
+    });
+}
+</script>
+
+ 
+<div id="modalFondo" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5); z-index:9998;"></div>
+
+<!-- Formulario emergente centrado -->
+<div id="formModificar" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+ background:#ffffff; border-radius:12px; padding:30px 25px; box-shadow:0 4px 20px rgba(0,0,0,0.3); z-index:9999;
+ width: 350px; font-family: Arial, sans-serif;">
+
+    <h3 style="margin-top: 0; color: #4caf50; text-align: center;">Modificar Vendedor</h3>
+
+    <input type="hidden" id="modificarId">
+
+    <label style="display:block; margin-bottom:10px;">
+        <span style="font-weight: bold;">Nombre:</span>
+        <input type="text" id="modificarNombre" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ccc; border-radius:6px;">
+    </label>
+
+    <label style="display:block; margin-bottom:10px;">
+        <span style="font-weight: bold;">Teléfono:</span>
+        <input type="text" id="modificarTelefono" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ccc; border-radius:6px;">
+    </label>
+
+    <label style="display:block; margin-bottom:15px;">
+        <span style="font-weight: bold;">Correo:</span>
+        <input type="email" id="modificarCorreo" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ccc; border-radius:6px;">
+    </label>
+    
+
+    <div style="text-align:right;">
+        <button onclick="guardarCambios()" style="background-color:#4caf50; color:white; padding:8px 14px; border:none; border-radius:6px; cursor:pointer; margin-right:10px;">Guardar</button>
+        <button onclick="cerrarFormulario()" style="background-color:#f44336; color:white; padding:8px 14px; border:none; border-radius:6px; cursor:pointer;">Cancelar</button>
+    </div>
+</div>
+<div id="formRegistro" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+ background:#ffffff; border-radius:12px; padding:30px 25px; box-shadow:0 4px 20px rgba(0,0,0,0.3); z-index:9999;
+ width: 350px; font-family: Arial, sans-serif;">
+
+    <h3 style="margin-top: 0; color: #2196f3; text-align: center;">Registrar Vendedor</h3>
+
+    <label>Nombre:
+        <input type="text" id="registroNombre" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px;">
+    </label><br><br>
+
+    <label>Teléfono:
+        <input type="text" id="registroTelefono" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px;">
+    </label><br><br>
+
+    <label>Correo:
+        <input type="email" id="registroCorreo" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px;">
+    </label><br><br>
+
+    <label>Contraseña:
+        <input type="password" id="registroContraseña" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px;">
+    </label><br><br>
+
+    <div style="text-align:right;">
+        <button onclick="guardarRegistro()" style="background-color:#2196f3; color:white; padding:8px 14px; border:none; border-radius:6px; cursor:pointer; margin-right:10px;">Guardar</button>
+        <button onclick="cerrarFormularioRegistro()" style="background-color:#f44336; color:white; padding:8px 14px; border:none; border-radius:6px; cursor:pointer;">Cancelar</button>
+    </div>
+</div>
+<script>
+function mostrarFormularioRegistro() {
+    document.getElementById('formRegistro').style.display = 'block';
+    document.getElementById('modalFondo').style.display = 'block';
+}
+
+function cerrarFormularioRegistro() {
+    document.getElementById('formRegistro').style.display = 'none';
+    document.getElementById('modalFondo').style.display = 'none';
+}
+</script>
+
+<script>
+    function modificarVendedor(id, nombre, telefono, correo) {
+    document.getElementById('formModificar').style.display = 'block';
+    document.getElementById('modificarId').value = id;
+    document.getElementById('modificarNombre').value = nombre;
+    document.getElementById('modificarTelefono').value = telefono;
+    document.getElementById('modificarCorreo').value = correo;
+}
+
+function cerrarFormulario() {
+    document.getElementById('formModificar').style.display = 'none';
+}
+
+function guardarCambios() {
+    const id = document.getElementById('modificarId').value;
+    const nombre = document.getElementById('modificarNombre').value;
+    const telefono = document.getElementById('modificarTelefono').value;
+    const correo = document.getElementById('modificarCorreo').value;
+
+    fetch(`/modificar_vendedor/${id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, telefono, correo })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Vendedor modificado correctamente');
+            location.reload();
+        } else {
+            alert('Error al modificar vendedor');
+        }
+    });
+}
+
+</script>
+<script>
+function modificarVendedor(id, nombre, telefono, correo) {
+    document.getElementById('modificarId').value = id;
+    document.getElementById('modificarNombre').value = nombre;
+    document.getElementById('modificarTelefono').value = telefono;
+    document.getElementById('modificarCorreo').value = correo;
+
+    document.getElementById('formModificar').style.display = 'block';
+    document.getElementById('modalFondo').style.display = 'block';
+}
+
+function cerrarFormularioModificar() {
+    document.getElementById('formModificar').style.display = 'none';
+    document.getElementById('modalFondo').style.display = 'none';
+}
+
+function guardarModificacion() {
+    const id = document.getElementById('modificarId').value;
+    const nombre = document.getElementById('modificarNombre').value;
+    const telefono = document.getElementById('modificarTelefono').value;
+    const correo = document.getElementById('modificarCorreo').value;
+
+    fetch(`/modificar_vendedor/${id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, telefono, correo })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Vendedor modificado correctamente');
+            cerrarFormularioModificar();
+            location.reload();
+        } else {
+            alert('Error al modificar vendedor');
+        }
+    })
+    .catch(error => {
+        console.error('Error en la solicitud:', error);
+        alert('Error en la solicitud');
+    });
+}
+</script>
+
+
+
+
+</body>
+</html>

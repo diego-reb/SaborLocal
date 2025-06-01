@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor Local</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            background-color: #e0f7fa; /* Fondo verde claro */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center; /* Centrar el contenido horizontalmente */
+        }
+
+        header {
+            background-color: #157718; /* Verde oscuro de la cabecera */
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%; /* Ocupar todo el ancho */
+            box-sizing: border-box; /* Incluir padding y border en el ancho */
+        }
+
+        header .logo-container a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+
+        header .logo-container .logo {
+            max-height: 40px;
+            margin-right: 20px; /* Espacio entre el logo y el buscador */
+        }
+
+        header .search-container {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 20px; /* Más redondeado */
+            padding: 5px 15px; /* Añadir padding horizontal */
+            border: 1px solid #ccc;
+            width: 50%; /* Un poco más ancho y menos centrado */
+            margin-right: 20px; /* Espacio a la derecha */
+            margin-left: 0; /* Alineado a la izquierda */
+        }
+
+        header .search-container .search-input {
+            border: none;
+            padding: 8px;
+            outline: none;
+            flex-grow: 1; /* Permite que el input crezca dentro del contenedor */
+            border-radius: 20px; /* Redondear el input también */
+        }
+
+        header .search-container .search-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px; /* Ajustar padding del botón */
+            color: #282727;
+        }
+
+        header .search-container .fa-search {
+            font-size: 1em;
+        }
+
+        header .user-menu {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        header .user-menu .user-icon {
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        header .user-menu .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 120px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            display: none; /* Initially hidden */
+        }
+
+        header .user-menu:hover .dropdown-menu {
+            display: block;
+        }
+
+        header .user-menu .dropdown-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        header .user-menu .dropdown-menu a:hover {
+            background-color: #ddd;
+        }
+
+        main {
+            flex-grow: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centrar horizontalmente */
+            justify-content: center; /* Centrar verticalmente */
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px; /* Espacio alrededor del contenedor principal */
+            box-sizing: border-box;
+        }
+
+        .main-logo-container {
+            margin-bottom: 40px; /* Mayor espacio después de la imagen */
+        }
+
+        .main-logo-container img {
+            max-width: 500px; /* Imagen más grande */
+            height:auto;
+        }
+
+        h1 {
+            color: #4caf50; /* Verde principal */
+            margin-bottom: 40px; /* Mayor espacio después de la pregunta */
+            font-size: 2em; /* Pregunta más grande */
+            text-align: center; /* Asegurar centrado */
+        }
+
+        .button-container {
+            display: flex;
+            gap: 30px; /* Mayor espacio entre botones */
+            margin-bottom: 0; /* Reducir o eliminar margen inferior si es necesario */
+            justify-content: center; /* Asegurar centrado */
+        }
+
+        .button {
+            background-color: #4caf50; /* Verde principal */
+            color: white;
+            border: none;
+            padding: 20px 40px; /* Botones más grandes */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.2em; /* Texto del botón más grande */
+            border-radius: 8px; /* Bordes un poco más redondeados */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #45a049; /* Verde más oscuro al pasar el ratón */
+        }
+
+        footer.site-footer {
+            background-color: #208f24; /* Verde oscuro del pie de página */
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            margin-top: auto; /* Empuja el footer hacia abajo */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        footer.site-footer .footer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        footer.site-footer .footer a {
+            color: white;
+            font-size: 1.5em; 
+            text-decoration: none;
+        }
+        i {
+            text-align: center;
+            width: 100%;
+            font-size: 2em; 
+        }
+        .titulo{
+            font-family: italic;
+            color:#dbbb05; 
+            font-size: 2.5em; 
+            font-weight: bold; 
+            text-align: center;
+            margin: 0; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+       <i class="titulo">Sabor Local</i>
+    </header>
+
+    <main>
+        <div class="main-logo-container">
+            <img src="/static/Img/Sabor.png" alt="Sabor Local" class="main-logo">
+        </div>
+        <h1>¿Qué deseas hacer hoy?</h1>
+        <div class="button-container">
+            <button class="button" onclick="window.location.href='/LoginVen'">Vendedor</button>
+            <button class="button" onclick="window.location.href='/login'">Comprador</button>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fas fa-phone"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+</body>
+</html>

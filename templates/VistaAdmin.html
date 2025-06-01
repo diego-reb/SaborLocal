@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Moderno</title>
+    <link rel="stylesheet" href="/static/Css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <a href="/">
+                    <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+                </a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" placeholder="Buscar..." class="search-input" id="searchInput">
+                <button class="search-button" id="searchButton">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+           <div class="cart-container">
+                <a href="/C">
+                <i class="fas fa-shopping-cart cart-icon"></i>
+                </a>
+            <span id="cart-count">0</span>
+            </div>
+<div class="user-menu">
+    <div class="user-icon" id="userIcon">
+        <i class="fas fa-user-circle"></i>
+    </div>
+    <div class="dropdown-menu" id="dropdownMenu">
+        <a href="/login"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    </div>
+</div>
+        </header>
+
+        <nav class="main-menu">
+            <ul>
+                <li><a href="/CA"><i class="fas fa-book"></i> Catálogo</a></li>
+                <li><a href="/PC"><i class="fas fa-tag"></i> Promociones</a></li>
+                <li><a href="/P"><i class="fas fa-clipboard-list"></i> Pedidos</a></li>
+                 <li><a href="/IA"><i class="fas fa-clipboard-list"></i> Gestion</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <div class="cafe-container">
+                <div class="cafe-box">
+                    <img src="/static/Img/huevo.jpg" alt="Oferta especial" class="box-image">
+                    <div class="box-overlay offer-overlay">
+                        <div class="offer-tag">OFERTA</div>
+                        <h3>Oferta Especial</h3>
+                        <p class="original-price">$50.00</p>
+                        <p class="discount-price">$39.99</p>
+                        <a href="/PC">
+                        <button class="offer-button">Ver Oferta</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="cafe-box">
+                    <img src="/static/Img/aguacate.jpg" alt="Producto destacado" class="box-image">
+                    <div class="box-overlay">
+                        <h3>Producto Destacado</h3>
+                        <p class="discount-price">$50.00</p>
+                        <a href="/PC">
+                            <button class="offer-button">Ver Oferta</button>
+                            </a>
+                    </div>
+                </div>
+                <div class="cafe-box">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.742141660058!2d-99.05548712501452!3d19.380314781887943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fd0614558e4b%3A0x3760847a107a0b9f!2sTecNM%20%7C%20Tecnol%C3%B3gico%20Nacional%20de%20M%C3%A9xico%20Campus%20Iztapalapa!5e0!3m2!1ses!2smx!4v1743483035853!5m2!1ses!2smx" class="box-map" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="box-overlay">
+                        <h3>Nuestra Ubicación</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <div class="text-content">
+                    <h2>Nuestros Productos</h2>
+                    <p>Descubre la mayor variedad de productos frescos de productores locales. Apoyamos la economía de nuestra región, ofreciéndote calidad y precios justos.</p>
+                </div>
+                <div class="image-content">
+                    <img src="/static/Img/Sabor.png" alt="Producto de muestra" class="content-image">
+                </div>
+            </div>
+        </main>
+        
+        <div class="footer">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fas fa-phone"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+
+            searchButton.addEventListener('click', function() {
+                const searchTerm = searchInput.value.toLowerCase();
+                if (searchTerm) {
+                    // Redirigir a la página de catálogo con el término de búsqueda
+                    window.location.href = catalogo.html?search=$:{searchTerm};
+                }
+            });
+
+            searchInput.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    searchButton.click();
+                }
+            });
+        });
+    </script>
+      <script src="/static/Js/buscador.js"></script>
+      <script src="/static/Js/contador.js"></script>
+      <script src="/static/Js/iconousuario.js"></script>
+      <script src="/static/Js/carrito.js"></script>
+      <script src="/static/Js/localstorage.js"></script>
+      <script src="/static/Js/ProductosCarrito.js"></script>
+</body>
+</html>

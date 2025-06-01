@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú de Usuario</title>
+  <link rel="stylesheet" href="/static/Css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .container {
+      background-color: rgb(233, 247, 238);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      height: 60px; 
+      margin-right: 20px;
+    }
+
+    .search-container,
+    .cart-container,
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-input {
+      padding: 8px;
+      border-radius: 5px 0 0 5px;
+      border: 1px solid #ccc;
+    }
+
+    .search-button {
+      padding: 8px;
+      background-color: #28a745;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      color: white;
+      cursor: pointer;
+    }
+
+    .cart-icon {
+      font-size: 20px;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background: white;
+      color: black;
+      right: 0;
+      top: 100%;
+      min-width: 150px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 5px;
+      z-index: 10;
+    }
+
+    .user-menu:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: black;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #f0f0f0;
+    }
+
+    nav.main-menu {
+      background-color: #e0f2e7;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 10px;
+    }
+
+    nav.main-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav.main-menu a {
+      text-decoration: none;
+      color: #333;
+      padding: 12px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    nav.main-menu a:hover {
+      background-color: #d1e7d9;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 25px;
+      flex-grow: 1;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 16px;
+      background-color: white;
+      color: black;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .item i {
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      color: #008000;
+    }
+
+    .item:hover {
+      background-color: #d1e7d9;
+      transform: scale(1.05);
+    }
+
+    .footer {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+      background-color: #f1f1f1;
+    }
+
+    .footer a {
+      color: #333;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-container">
+        <a href="/">
+          <img src="/static/Img/Sabor.png" alt="Logo" class="logo">
+        </a>
+      </div>
+
+      <div class="search-container">
+        <input type="text" placeholder="Buscar..." class="search-input">
+        <button class="search-button">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+
+      <div class="cart-container">
+        <a href="/C">
+          <i class="fas fa-shopping-cart cart-icon"></i>
+        </a>
+        <span id="cart-count">0</span>
+      </div>
+
+      <div class="user-menu">
+        <div class="user-icon" id="userIcon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="dropdown-menu" id="dropdownMenu">
+    <a href="/config"><i class="fas fa-cog"></i> Configuración</a>
+
+    {% if 'cliente_id' in session %}
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    {% else %}
+        <a href="/sesion"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+    {% endif %}
+</div>
+      </div>
+    </header>
+
+    <nav class="main-menu">
+      <ul>
+        <li><a href="/CA"><i class="fas fa-book"></i> Catálogo</a></li>
+        <li><a href="/PC"><i class="fas fa-tag"></i> Promociones</a></li>
+        <li><a href="/P"><i class="fas fa-tag"></i> Pedidos</a></li>
+      </ul>
+    </nav>
+
+    <div class="content">
+      <a href="/Direccion" class="item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Direcciones</span>
+      </a>
+      <a href="/EDP" class="item">
+        <i class="fas fa-dollar-sign"></i>
+        <span>Mis pagos</span>
+      </a>
+      <a href="/DP" class="item">
+        <i class="fas fa-box-open"></i>
+        <span>Devoluciones</span>
+      </a>
+    </div>
+
+    <div class="footer">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fas fa-phone"></i></a>
+      <a href="#"><i class="fas fa-envelope"></i></a>
+    </div>
+  </div>
+
+  <script src="/static/Js/buscador.js"></script>
+  <script src="/static/Js/contador.js"></script>
+  <script src="/static/Js/iconousuario.js"></script>
+  <script src="/static/Js/carrito.js"></script>
+  <script src="/static/Js/localstorage.js"></script>
+  <script src="/static/Js/ProductosCarrito.js"></script>
+</body>
+</html>
